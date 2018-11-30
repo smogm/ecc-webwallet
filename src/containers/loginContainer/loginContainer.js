@@ -5,6 +5,10 @@ import logo from 'assets/img/logo.png';
 const { Content, Header } = Layout;
 
 class loginContainer extends PureComponent {
+  showWalletConfirm = () => {
+    this.props.history.push('/confirm');
+  }
+
   render () {
     return (
       <div className="block">
@@ -23,7 +27,7 @@ class loginContainer extends PureComponent {
                   <span>Create or unlock a wallet</span>
                 </Col>
                 <Col className="center" sm={{ span: 14, offset: 5 }} xs={{ span: 20, offset:2 }}>
-                  <Button>Create a new wallet</Button>
+                  <Button onClick={this.showWalletConfirm}>Create a new wallet</Button>
                 </Col>
                 <Col className="center" sm={{ span: 14, offset: 5 }} xs={{ span: 20, offset:2 }}>
                   <Button>Unlock existing wallet</Button>
