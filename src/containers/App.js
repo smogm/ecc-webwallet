@@ -7,7 +7,7 @@ import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import PageNotFound from 'components/PageNotFound/PageNotFound';
 import loginContainer from 'containers/loginContainer/loginContainer';
 
-import 'assets/styles/App.less';
+import 'css/App.less';
 
 class App extends Component {
   render() {
