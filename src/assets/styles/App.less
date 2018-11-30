@@ -1,0 +1,31 @@
+@import './shared.less';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: @white;
+  color: #222722;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Space Mono', monospace;
+  margin: 0px;
+}
+
+.App {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  
+  .content {
+    display: table-cell;
+    vertical-align: middle;
+    margin: auto;
+    width: 550px;
+    height: 600px;
+    padding: 0px 20px;
+    margin-bottom: 72px;
+  }
+}
