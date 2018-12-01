@@ -40,6 +40,9 @@ class keystoreUploadContainer extends PureComponent {
       case 'password':
         this.setState({ password: evt.target.value });
         break;
+      default:
+        this.setState({ password: '' });
+        break;
     }
   }
 
