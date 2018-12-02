@@ -6,7 +6,11 @@ const { Content, Header } = Layout;
 
 class loginContainer extends PureComponent {
   showWalletConfirm = () => {
-    this.props.history.push('/confirm');
+    this.props.history.push('/create');
+  }
+
+  showWalletUnlock = () => {
+    this.props.history.push('/unlock');
   }
 
   render () {
@@ -30,7 +34,7 @@ class loginContainer extends PureComponent {
                   <Button onClick={this.showWalletConfirm}>Create a new wallet</Button>
                 </Col>
                 <Col className="center" sm={{ span: 14, offset: 5 }} xs={{ span: 20, offset:2 }}>
-                  <Button>Unlock existing wallet</Button>
+                  <Button onClick={this.showWalletUnlock}>Unlock existing wallet</Button>
                 </Col>
               </Row>
             </Content>
