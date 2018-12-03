@@ -4,7 +4,7 @@ import logo from 'assets/img/logo.png';
 
 const { Content, Header } = Layout;
 
-class keystoreUploadContainer extends PureComponent {
+class KeystoreUploadContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,6 +49,7 @@ class keystoreUploadContainer extends PureComponent {
   unlockWallet = () => {
     if (this.state.password !== '' && this.state.password === 'bitcoingreen') {
       this.setState({ isValidPwd: true });
+      this.props.history.push('/wallet');
     } else {
       this.setState({ isValidPwd: false });
     }
@@ -97,4 +98,4 @@ class keystoreUploadContainer extends PureComponent {
   }  
 }
 
-export default keystoreUploadContainer;
+export default KeystoreUploadContainer;

@@ -4,7 +4,7 @@ import logo from 'assets/img/logo.png';
 
 const { Content, Header } = Layout;
 
-class loginContainer extends PureComponent {
+class LoginContainer extends PureComponent {
   showWalletConfirm = () => {
     this.props.history.push('/create');
   }
@@ -45,4 +45,4 @@ class loginContainer extends PureComponent {
   }  
 }
 
-export default loginContainer;
+export default LoginContainer;
