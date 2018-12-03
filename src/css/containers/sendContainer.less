@@ -1,0 +1,71 @@
+.block {
+    width: 550px;
+    height: 600px;
+    margin: 0 auto;
+
+    @media all and (max-width: 500px) {
+        width: auto !important;
+    }
+
+    .send_area {
+        .send_label {
+            font-size: 18px;
+            color: @gray;
+            margin-top: 30px;
+        }
+
+        .send_balance_label {
+            font-size: 18px;
+            color: @text-color;
+            margin-top: 5px;
+        }
+
+        .ant-input-group-addon {
+            background: @white !important;
+            color: @gray !important;
+        }
+
+        input {
+            height: 50px;
+            border-left: none;
+            border-right: none;
+            color: @text-color;
+        }
+
+        .send_to, .send_amount {
+            margin-top: 20px;
+        }
+
+        .send_fee_area {
+            margin-top: 10px;
+            padding: 0 15px;
+
+            .send_fee {
+                color: @gray;
+            }
+
+            .send_fee_amout {
+                text-align: right;
+                
+                span {
+                    color: @btn-bg-color;
+                }
+            }
+        }
+
+        .submit_transaction {
+            margin-top: 30px;
+
+            button {
+                width: 200px;
+                height: 50px;
+                border-radius: 30px;
+                border: none;
+                background-color: @btn-bg-color;
+                color: @white;
+                font-weight: bold;
+                font-size: 18px;
+            }
+        }
+    }
+}
