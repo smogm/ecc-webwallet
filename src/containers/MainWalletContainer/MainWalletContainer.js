@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'; 
 import { Row, Col, Button, Layout } from 'antd';
 import ReceiveContainer from './ReceiveContainer/ReceiveContainer';
+import SendContainer from './SendContainer/SendContainer';
 
 const { Content, Header } = Layout;
 
@@ -40,7 +41,7 @@ class mainWalletContainer extends PureComponent {
                 </Row>
                 <Row className="main_wallet_container">
                   {this.state.containerType === 'receive' ?
-                    <ReceiveContainer /> : null
+                    <ReceiveContainer /> : <SendContainer />
                   }
                 </Row>
               </div>
