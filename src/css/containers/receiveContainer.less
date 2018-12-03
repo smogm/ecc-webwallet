@@ -1,0 +1,54 @@
+.block {
+    width: 550px;
+    height: 600px;
+    margin: 0 auto;
+
+    @media all and (max-width: 500px) {
+        width: auto !important;
+    }
+
+    .receive_area {
+        .receive_label {
+            font-size: 18px;
+            color: @gray;
+            margin-top: 30px;
+        }
+
+        .receive_balance_label {
+            font-size: 18px;
+            color: @text-color;
+            margin-top: 5px;
+        }
+
+        .receive_qrcode {
+            margin-top: 20px;
+        }
+
+        .receive_address_area {
+            height: 50px;
+            border: 1px solid lightgray;
+            border-radius: 3px;
+            padding: 0 5px;
+            margin-top: 30px;
+
+            .clipboard_cpy {
+                line-height: 50px;
+            }
+
+            input {
+                border: none;
+                color: @text-color;
+                font-weight: bold;
+            }
+            
+            .address_copy_btn {
+                width: 100%;
+                height: 40px;
+                font-size: 18px;
+                border-radius: 3px;
+                background-color: @btn-bg-color;
+                color: @white;
+            }
+        }
+    }
+}

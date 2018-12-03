@@ -4,7 +4,11 @@ import logo from 'assets/img/logo.png';
 
 const { Content, Header } = Layout;
 
-class walletConfirmContainer extends PureComponent {
+class WalletConfirmContainer extends PureComponent {
+  showWalletPage = () => {
+    this.props.history.push('/wallet');
+  }
+
   render () {
     return (
       <div className="block">
@@ -26,7 +30,7 @@ class walletConfirmContainer extends PureComponent {
                   <Input addonAfter={<Icon type="setting" />} addonBefore={<Icon type="setting" />} type="password" />
                 </Col>
                 <Col className="center" sm={{ span: 4, offset: 10 }} xs={{ span: 6, offset:8 }}>
-                  <Button>Save</Button>
+                  <Button onClick={this.showWalletPage}>Save</Button>
                 </Col>
               </Row>
             </Content>
@@ -37,4 +41,4 @@ class walletConfirmContainer extends PureComponent {
   }  
 }
 
-export default walletConfirmContainer;
+export default WalletConfirmContainer;
