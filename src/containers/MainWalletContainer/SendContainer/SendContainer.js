@@ -1,4 +1,8 @@
 import React, { PureComponent } from 'react'; 
+import { compose } from 'recompose';
+import { bindActionCreators } from 'redux';
+import { connectWallet, walletActionCreators } from 'core';
+import { promisify } from '../../../utilities';
 import { Row, Col, Input, Icon, Button, Layout } from 'antd';
 
 const { Content} = Layout;
@@ -7,9 +11,22 @@ class SendContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      bitgBalance: '333.121',
+      bitgBalance: 0,
       feeAmount: '1.200'
     }
+  }
+
+  componentWillMount() {
+    const { wallet } = this.props;
+    promisify(this.props.getBalance, {
+      address: wallet.address
+    })
+      .then((res) => {
+        if (res === 'ok') {
+          this.setState({ bitgBalance: wallet.balance ? wallet.balance : 0 });
+        }
+      })
+      .catch(e => console.log(e));
   }
 
   render () {
@@ -53,4 +70,20 @@ class SendContainer extends PureComponent {
   }  
 }
 
-export default SendContainer;
+const mapStateToProps = ({wallet}) => ({
+  wallet: wallet
+});
+
+const mapDisptachToProps = (dispatch) => {
+  const {
+    getBalance
+  } = walletActionCreators
+
+  return bindActionCreators({
+    getBalance
+  }, dispatch);
+}
+
+export default compose(
+  connectWallet(mapStateToProps, mapDisptachToProps),
+)(SendContainer);

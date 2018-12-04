@@ -13,9 +13,8 @@ export async function ApiService({ api, third_party, method, params }) {
   }
 
   set(headers, 'Accept', 'application/json');
-  set(headers, 'Content-Type', 'application/json');
-  //set(headers, 'Access-Control-Expose-Headers', 'authorization');
-  
+  // set(headers, 'Content-Type', 'application/json');
+  // set(headers, 'Access-Control-Expose-Headers', 'authorization');
   const reqBody = {
     method,
     headers,
@@ -24,10 +23,9 @@ export async function ApiService({ api, third_party, method, params }) {
   if (!isEmpty(params)) {
     reqBody.body = JSON.stringify(params);
   }
-
+  
   return fetch(path, reqBody)
     .then(response => {
-      
       return response.json();
     })
     .then((data) => {

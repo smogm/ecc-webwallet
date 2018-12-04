@@ -1,5 +1,6 @@
 import {
-  WALLET_CREATE_REQUEST
+  WALLET_CREATE_REQUEST,
+  BALANCE_REQUEST_SUCCESS
 } from './actions';
 import { initialState } from '../initialState';
 
@@ -11,6 +12,12 @@ export default function wallet(state = initialState.wallet, action = {}) {
       return {
         ...state,
         address: payload.address
+      }
+    }
+    case BALANCE_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        balance: payload.balance
       }
     }
     default: {
