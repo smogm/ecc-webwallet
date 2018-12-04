@@ -1,4 +1,8 @@
-import React, { PureComponent } from 'react'; 
+import React, { PureComponent } from 'react';
+import { compose } from 'recompose';
+import { bindActionCreators } from 'redux';
+import { connectWallet, walletActionCreators } from 'core';
+import { promisify } from '../../utilities';
 import { Row, Col, Icon, Button, Input, Layout } from 'antd';
 import logo from 'assets/img/logo.png';
 
@@ -49,7 +53,13 @@ class KeystoreUploadContainer extends PureComponent {
   unlockWallet = () => {
     if (this.state.password !== '' && this.state.password === 'bitcoingreen') {
       this.setState({ isValidPwd: true });
-      this.props.history.push('/wallet');
+      promisify(this.props.createWallet, {
+        address: 'GTsqojGaG2sy4uUTwyqwjxDtaVaF9ja5DV'
+      })
+        .then((res) => {
+          this.props.history.push('/wallet');
+        })
+        .catch(e => console.log(e));
     } else {
       this.setState({ isValidPwd: false });
     }
@@ -98,4 +108,20 @@ class KeystoreUploadContainer extends PureComponent {
   }  
 }
 
-export default KeystoreUploadContainer;
+const mapStateToProps = ({wallet}) => ({
+  wallet: wallet
+});
+
+const mapDisptachToProps = (dispatch) => {
+  const {
+    createWallet
+  } = walletActionCreators
+
+  return bindActionCreators({
+    createWallet
+  }, dispatch);
+}
+
+export default compose(
+  connectWallet(mapStateToProps, mapDisptachToProps),
+)(KeystoreUploadContainer);

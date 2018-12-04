@@ -1,12 +1,22 @@
-import React, { PureComponent } from 'react'; 
+import React, { PureComponent } from 'react';
+import { compose } from 'recompose';
+import { bindActionCreators } from 'redux';
 import { Row, Col, Icon, Button, Input, Layout } from 'antd';
+import { connectWallet, walletActionCreators } from 'core';
+import { promisify } from '../../utilities';
 import logo from 'assets/img/logo.png';
 
 const { Content, Header } = Layout;
 
 class WalletConfirmContainer extends PureComponent {
   showWalletPage = () => {
-    this.props.history.push('/wallet');
+    promisify(this.props.createWallet, {
+      address: 'GTsqojGaG2sy4uUTwyqwjxDtaVaF9ja5DV'
+    })
+      .then((res) => {
+        this.props.history.push('/wallet');
+      })
+      .catch(e => console.log(e));
   }
 
   render () {
@@ -38,7 +48,23 @@ class WalletConfirmContainer extends PureComponent {
         </Layout>
       </div>
     );
-  }  
+  }
 }
 
-export default WalletConfirmContainer;
+const mapStateToProps = ({wallet}) => ({
+  wallet: wallet
+});
+
+const mapDisptachToProps = (dispatch) => {
+  const {
+    createWallet
+  } = walletActionCreators
+
+  return bindActionCreators({
+    createWallet
+  }, dispatch);
+}
+
+export default compose(
+  connectWallet(mapStateToProps, mapDisptachToProps),
+)(WalletConfirmContainer);
