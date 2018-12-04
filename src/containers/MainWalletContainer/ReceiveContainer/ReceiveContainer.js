@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react'; 
+import { compose } from 'recompose';
 import { Row, Col, Input, Icon, Button, Layout } from 'antd';
 import QRCode from 'qrcode.react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { connectWallet } from 'core';
 
 const { Content} = Layout;
 
@@ -10,12 +12,13 @@ class ReceiveContainer extends PureComponent {
     super(props);
     this.state = {
       bitgBalance: 333.121,
-      address: 'GTsqojGaG2sy4uUTwyqwjxDtaVaF9ja5DV',
       copied: false
     }
   }
 
   render () {
+    const { wallet } = this.props
+
     return (
       <div className="block">
         <Layout>
@@ -29,15 +32,15 @@ class ReceiveContainer extends PureComponent {
                   <span>{this.state.bitgBalance} BITG</span>
                 </Col>
                 <Col className="receive_qrcode center">
-                  <QRCode value={this.state.address}/>
+                  <QRCode value={wallet.address ? wallet.address : ''}/>
                 </Col>
-                <Col className="receive_address_area" sm={{ span: 18, offset: 3 }}>
-                  <Row className="clipboard_cpy">
-                    <Col sm={{ span: 18 }} xs={{ span: 16}}>
-                      <Input value={this.state.address} readOnly/>
+                <Col className="receive_address_area" sm={{ span: 20, offset: 2 }}>
+                  <Row className="clipboard_cpy_area">
+                    <Col className="receive_address" sm={{ span: 18 }} xs={{ span: 16}}>
+                      <Input value={wallet.address ? wallet.address : ''} readOnly/>
                     </Col>
                     <Col sm={{ span: 6 }} xs={{ span: 8}}>
-                      <CopyToClipboard text={this.state.address} onCopy={() => this.setState({copied: true})}>
+                      <CopyToClipboard text={wallet.address ? wallet.address : ''} onCopy={() => this.setState({copied: true})}>
                         <Button className="address_copy_btn">Copy <Icon type="copy"/></Button>
                       </CopyToClipboard>
                     </Col>
@@ -52,4 +55,10 @@ class ReceiveContainer extends PureComponent {
   }  
 }
 
-export default ReceiveContainer;
+const mapStateToProps = ({wallet}) => ({
+  wallet: wallet
+});
+
+export default compose(
+  connectWallet(mapStateToProps, null),
+)(ReceiveContainer);
