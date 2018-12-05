@@ -16,20 +16,19 @@ class SendContainer extends PureComponent {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { wallet } = this.props;
     promisify(this.props.getBalance, {
       address: wallet.address
     })
       .then((res) => {
-        if (res === 'ok') {
-          this.setState({ bitgBalance: wallet.balance ? wallet.balance : 0 });
-        }
       })
       .catch(e => console.log(e));
   }
 
   render () {
+    const { wallet } = this.props;
+
     return (
       <div className="block">
         <Layout>
@@ -40,7 +39,7 @@ class SendContainer extends PureComponent {
                   <span>Available Balance</span>
                 </Col>
                 <Col className="send_balance_label center">
-                  <span>{this.state.bitgBalance} BITG</span>
+                  <span>{ wallet.balance ? wallet.balance : 0 } BITG</span>
                 </Col>
                 <Col className="send_to" sm={{ span: 18, offset: 3 }}>
                   <Input addonBefore={<span>To:</span>} addonAfter={<Icon type="setting" />} type="text" />
