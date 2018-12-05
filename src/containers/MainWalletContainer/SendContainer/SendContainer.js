@@ -21,9 +21,18 @@ class SendContainer extends PureComponent {
     promisify(this.props.getBalance, {
       address: wallet.address
     })
-      .then((res) => {
+      .then((res) => {     
       })
       .catch(e => console.log(e));
+    
+    setTimeout(() => {
+      promisify(this.props.getUtxos, {
+        address: wallet.address
+      })
+        .then((res) => {
+        })
+        .catch(e => console.log(e));
+    }, 1000);
   }
 
   render () {
@@ -75,11 +84,13 @@ const mapStateToProps = ({wallet}) => ({
 
 const mapDisptachToProps = (dispatch) => {
   const {
-    getBalance
+    getBalance,
+    getUtxos
   } = walletActionCreators
 
   return bindActionCreators({
-    getBalance
+    getBalance,
+    getUtxos
   }, dispatch);
 }
 
