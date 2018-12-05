@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react'; 
 import { compose } from 'recompose';
+import { bindActionCreators } from 'redux';
+import { connectWallet, walletActionCreators } from 'core';
+import { promisify } from '../../../utilities';
 import { Row, Col, Input, Icon, Button, Layout } from 'antd';
 import QRCode from 'qrcode.react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { connectWallet } from 'core';
 
 const { Content} = Layout;
 
@@ -11,13 +13,22 @@ class ReceiveContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      bitgBalance: 333.121,
       copied: false
     }
   }
 
+  componentDidMount() {
+    const { wallet } = this.props;
+    promisify(this.props.getBalance, {
+      address: wallet.address
+    })
+      .then((res) => {
+      })
+      .catch(e => console.log(e));
+  }
+
   render () {
-    const { wallet } = this.props
+    const { wallet } = this.props;
 
     return (
       <div className="block">
@@ -29,7 +40,7 @@ class ReceiveContainer extends PureComponent {
                   <span>Available Balance</span>
                 </Col>
                 <Col className="receive_balance_label center">
-                  <span>{this.state.bitgBalance} BITG</span>
+                  <span>{wallet.balance ? wallet.balance : 0} BITG</span>
                 </Col>
                 <Col className="receive_qrcode center">
                   <QRCode value={wallet.address ? wallet.address : ''}/>
@@ -59,6 +70,16 @@ const mapStateToProps = ({wallet}) => ({
   wallet: wallet
 });
 
+const mapDisptachToProps = (dispatch) => {
+  const {
+    getBalance
+  } = walletActionCreators
+
+  return bindActionCreators({
+    getBalance
+  }, dispatch);
+}
+
 export default compose(
-  connectWallet(mapStateToProps, null),
+  connectWallet(mapStateToProps, mapDisptachToProps),
 )(ReceiveContainer);
