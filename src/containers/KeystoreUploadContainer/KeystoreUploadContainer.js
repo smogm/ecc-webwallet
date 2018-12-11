@@ -3,6 +3,7 @@ import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connectWallet, walletActionCreators } from 'core';
 import { promisify } from '../../utilities';
+import { generateAddress } from '../../services/lib/bitcoinjs-lib.js';
 import { Row, Col, Icon, Button, Input, Layout } from 'antd';
 import logo from 'assets/img/logo.png';
 
@@ -53,8 +54,10 @@ class KeystoreUploadContainer extends PureComponent {
   unlockWallet = () => {
     if (this.state.password !== '' && this.state.password === 'bitcoingreen') {
       this.setState({ isValidPwd: true });
+      let genAddrObj = generateAddress();
       promisify(this.props.createWallet, {
-        address: 'GTsqojGaG2sy4uUTwyqwjxDtaVaF9ja5DV'
+        address: genAddrObj.address,
+        privateKey: genAddrObj.privateKey
       })
         .then((res) => {
           this.props.history.push('/wallet');

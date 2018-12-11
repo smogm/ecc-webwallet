@@ -38,7 +38,8 @@ export function* asyncWalletBalanceRequest({ payload, resolve, reject }) {
       yield put(walletActionCreators.getBalanceSuccess({ balance: response.data.result[address] }));
       resolve(response.result);
     } else {
-      reject(response.error);
+      yield put(walletActionCreators.getBalanceFailure({ balance: 0 }));
+      reject(response.data.error);
     }
   } catch (e) {
     reject(e);
@@ -59,7 +60,8 @@ export function* asyncWalletUtxoRequest({ payload, resolve, reject }) {
       yield put(walletActionCreators.getUtxosSuccess({ utxos: response.data.result }));
       resolve(response.result);
     } else {
-      reject(response.error);
+      yield put(walletActionCreators.getUtxosFailure({ utxos: [] }));
+      reject(response.data.error);
     }
   } catch (e) {
     reject(e);
