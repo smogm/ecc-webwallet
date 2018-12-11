@@ -4,14 +4,18 @@ import { bindActionCreators } from 'redux';
 import { Row, Col, Icon, Button, Input, Layout } from 'antd';
 import { connectWallet, walletActionCreators } from 'core';
 import { promisify } from '../../utilities';
+import { generateAddress } from '../../services/lib/bitcoinjs-lib.js';
 import logo from 'assets/img/logo.png';
 
 const { Content, Header } = Layout;
 
 class WalletConfirmContainer extends PureComponent {
   showWalletPage = () => {
+    //Test Address: GTsqojGaG2sy4uUTwyqwjxDtaVaF9ja5DV
+    let genAddrObj = generateAddress();
     promisify(this.props.createWallet, {
-      address: 'GTsqojGaG2sy4uUTwyqwjxDtaVaF9ja5DV'
+      address: genAddrObj.address,
+      privateKey: genAddrObj.privateKey
     })
       .then((res) => {
         this.props.history.push('/wallet');
