@@ -3,7 +3,7 @@ import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connectWallet, walletActionCreators } from 'core';
 import { promisify } from '../../utilities';
-import { importAddressFromWif } from '../../services/lib/bitcoinjs-lib.js';
+import { importAddressFromPrivateKey } from '../../services/lib/bitcoinjs-lib.js';
 import { importKeyStore } from '../../services/lib/keystore-lib.js';
 import { Base64Decode } from '../../services/common.js';
 
@@ -60,7 +60,7 @@ class KeystoreUploadContainer extends PureComponent {
       if (this.state.keyObject) {
         importKeyStore(this.state.password, this.state.keyObject)
           .then((privateKey) => {
-            let address = importAddressFromWif(privateKey);
+            let address = importAddressFromPrivateKey(privateKey);
             promisify(this.props.createWallet, {
               address: address,
               privateKey: privateKey

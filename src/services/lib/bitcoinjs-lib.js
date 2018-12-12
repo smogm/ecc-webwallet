@@ -7,7 +7,7 @@ export const generateAddress = () => {
   return { address: address, privateKey: privateKey };
 }
 
-export const importAddressFromWif = (privateKey) => {
+export const importAddressFromPrivateKey = (privateKey) => {
   const keyPair = bitcoin.ECPair.fromPrivateKey(privateKey);
   const { address } = bitcoin.payments.p2pkh({ pubkey: keyPair.publicKey });
   return address;

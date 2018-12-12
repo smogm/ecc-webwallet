@@ -4,9 +4,9 @@ import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
 import sagas from './sagas';
-import { saveState } from "../../services/localStorage";
+// import { loadState, saveState } from "../../services/localStorage";
 import rootReducer from './reducers';
-import {throttle} from "lodash";
+// import {throttle} from "lodash";
 
 // const persistedState = loadState();
 const sagaMiddleware = createSagaMiddleware();
@@ -40,6 +40,6 @@ const store = createStore(
 );
 
 sagaMiddleware.run(sagas);
-store.subscribe(throttle(() => saveState(store.getState()), 1000));
+// store.subscribe(throttle(() => saveState(store.getState()), 1000));
 export default store
 
