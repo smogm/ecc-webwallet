@@ -55,7 +55,8 @@ class KeystoreUploadContainer extends PureComponent {
     }
   }
 
-  unlockWallet = () => {
+  unlockWallet = (e) => {
+    e.preventDefault();
     if (this.state.password !== '') {
       if (this.state.keyObject) {
         importKeyStore(this.state.password, this.state.keyObject)
@@ -94,26 +95,28 @@ class KeystoreUploadContainer extends PureComponent {
                 </Col>
               </Row>
               <Row className="wallet_unlock_area">
-                <Col className="wallet_keystore_label center" sm={{ span: 16, offset: 4 }} xs={{ span: 18, offset: 3 }}>
-                  <span>Enter a keystore password to get started</span>
-                </Col>
-                <Col className="keystore_btn center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
-                  <input type="file" ref={input => this.inputElement = input} onChange={this.fileChangedHandler}/>
-                  <Button onClick={this.chooseFile}>{ this.state.selectedFile ? this.state.selectedFile.name : 'Keystore file' }</Button>
-                </Col>
-                <Col className="wallet_password center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
-                  <Input disabled={this.state.fileData === '' ? true : false} onChange={(evt) => this.onChangeData('password', evt)} addonAfter={<Icon type="setting" />} addonBefore={<Icon type="setting" />} type="password" />
-                </Col>
-                {
-                  !this.state.isValidPwd ? 
-                  <Col sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
-                    <span className="invalid_msg">Invalid Password</span>
-                  </Col> :
-                  null
-                }
-                <Col className="unlock_btn center" sm={{ span: 4, offset: 10 }} xs={{ span: 6, offset:8 }}>
-                  <Button onClick={this.unlockWallet} disabled={this.state.fileData === '' || !this.state.password ? true : false}>Unlock</Button>
-                </Col>
+                <form onSubmit={ this.unlockWallet }>  
+                  <Col className="wallet_keystore_label center" sm={{ span: 16, offset: 4 }} xs={{ span: 18, offset: 3 }}>
+                    <span>Enter a keystore password to get started</span>
+                  </Col>
+                  <Col className="keystore_btn center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
+                    <input type="file" ref={input => this.inputElement = input} onChange={this.fileChangedHandler}/>
+                    <Button type="button" onClick={this.chooseFile}>{ this.state.selectedFile ? this.state.selectedFile.name : 'Keystore file' }</Button>
+                  </Col>
+                  <Col className="wallet_password center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
+                    <Input disabled={this.state.fileData === '' ? true : false} onChange={(evt) => this.onChangeData('password', evt)} addonAfter={<Icon type="setting" />} addonBefore={<Icon type="setting" />} type="password" />
+                  </Col>
+                  {
+                    !this.state.isValidPwd ? 
+                    <Col sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
+                      <span className="invalid_msg">Invalid Password</span>
+                    </Col> :
+                    null
+                  }
+                  <Col className="unlock_btn center" sm={{ span: 4, offset: 10 }} xs={{ span: 6, offset:8 }}>
+                    <Button type="submit" disabled={this.state.fileData === '' || !this.state.password ? true : false}>Unlock</Button>
+                  </Col>
+                </form>
               </Row>
             </Content>
           </Layout>

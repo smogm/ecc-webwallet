@@ -18,7 +18,8 @@ class WalletConfirmContainer extends PureComponent {
     }
   }
 
-  showWalletPage = () => {
+  showWalletPage = (e) => {
+    e.preventDefault();
     //Test Address: GTsqojGaG2sy4uUTwyqwjxDtaVaF9ja5DV 
     let genAddrObj = generateAddress();
     promisify(this.props.createWallet, {
@@ -75,15 +76,17 @@ class WalletConfirmContainer extends PureComponent {
                 </Col>
               </Row>
               <Row className="wallet_confirm_area">
-                <Col className="wallet_confirm_label center" sm={{ span: 14, offset: 5 }} xs={{ span: 18, offset: 3 }}>
-                  <span>Add a password to save your wallet</span>
-                </Col>
-                <Col className="wallet_password center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
-                  <Input addonAfter={<Icon type="setting" />} onChange={(evt) => this.onChangeData('password', evt)} addonBefore={<Icon type="setting" />} type="password" />
-                </Col>
-                <Col className="center" sm={{ span: 4, offset: 10 }} xs={{ span: 6, offset:8 }}>
-                  <Button onClick={this.showWalletPage}>Save</Button>
-                </Col>
+                <form onSubmit={ this.showWalletPage }>
+                  <Col className="wallet_confirm_label center" sm={{ span: 14, offset: 5 }} xs={{ span: 18, offset: 3 }}>
+                    <span>Add a password to save your wallet</span>
+                  </Col>
+                  <Col className="wallet_password center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
+                    <Input addonAfter={<Icon type="setting" />} onChange={(evt) => this.onChangeData('password', evt)} addonBefore={<Icon type="setting" />} type="password" />
+                  </Col>
+                  <Col className="center" sm={{ span: 4, offset: 10 }} xs={{ span: 6, offset:8 }}>
+                    <Button type="submit">Save</Button>
+                  </Col>
+                </form>
               </Row>
             </Content>
           </Layout>
