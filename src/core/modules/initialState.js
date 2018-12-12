@@ -1,15 +1,15 @@
 const auth = {
-  user: {}
+  user: {},
 };
 
 const wallet = {
   address: '',
   privateKey: '',
   balance: '',
-  utxo: []
-}
+  utxo: [],
+};
 
 export const initialState = {
   auth,
-  wallet
+  wallet,
 };

@@ -10,7 +10,7 @@ import {
   walletActionCreators,
   WALLET_CREATE_REQUEST,
   BALANCE_REQUEST,
-  UTXOS_REQUEST
+  UTXOS_REQUEST,
 } from './actions';
 
 import { ApiService } from '../../../services';
@@ -32,7 +32,7 @@ export function* asyncWalletBalanceRequest({ payload, resolve, reject }) {
         api: `https://www.coinexplorer.net/api/v1/BITG/address/balance?address=${address}`,
         third_party: true,
         method: 'GET',
-        params: {}
+        params: {},
       });
     if (response.data.success) {
       yield put(walletActionCreators.getBalanceSuccess({ balance: response.data.result[address] }));
@@ -54,7 +54,7 @@ export function* asyncWalletUtxoRequest({ payload, resolve, reject }) {
         api: `https://www.coinexplorer.net/api/v1/BITG/address/unspent?address=${address}`,
         third_party: true,
         method: 'GET',
-        params: {}
+        params: {},
       });
     if (response.data.success) {
       yield put(walletActionCreators.getUtxosSuccess({ utxos: response.data.result }));
@@ -93,6 +93,6 @@ export default function* () {
   yield all([
     fork(watchCreateWalletRequest),
     fork(watchWalletBalanceRequest),
-    fork(watchWalletUtxosRequest)
+    fork(watchWalletUtxosRequest),
   ]);
 }

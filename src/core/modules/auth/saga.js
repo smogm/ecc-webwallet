@@ -8,7 +8,7 @@ import {
 
 import {
   authActionCreators,
-  LOGIN_REQUEST
+  LOGIN_REQUEST,
 } from './actions';
 
 import { ApiService } from '../../../services';
@@ -18,12 +18,12 @@ export function* asyncLoginRequest({ payload, resolve, reject }) {
   try {
     const response = yield call(ApiService,
       {
-        api: `/admin/signin`,
+        api: '',
         method: 'POST',
         params: {
-          email: email,
-          password: password
-        }
+          email,
+          password,
+        },
       });
     // @TODO: Open next lines after login api is completed
     if (response.status === 200) {
@@ -47,6 +47,6 @@ export function* watchLoginRequest() {
 
 export default function* () {
   yield all([
-    fork(watchLoginRequest)
+    fork(watchLoginRequest),
   ]);
 }

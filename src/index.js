@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from 'containers/App';
-import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import registerServiceWorker from './registerServiceWorker';
 
 import 'font-awesome/css/font-awesome.min.css';
 import 'antd/dist/antd.css';
@@ -10,7 +10,7 @@ import 'css/index.less';
 
 ReactDOM.render(
   <BrowserRouter>
-    <App/>
+    <App />
   </BrowserRouter>,
   document.getElementById('root')
 );

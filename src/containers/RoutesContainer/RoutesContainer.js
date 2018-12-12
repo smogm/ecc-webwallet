@@ -5,16 +5,15 @@ import LoginContainer from 'containers/LoginContainer/LoginContainer';
 import MainWalletContainer from 'containers/MainWalletContainer/MainWalletContainer';
 
 class RoutesContainer extends PureComponent {
-
-  render () {
+  render() {
     return (
       <Switch>
-        <Route exact path="/login" component={LoginContainer}/>
-        <Route exact path="/wallet" component={MainWalletContainer}/>
-        <Route path="/" component={LoginContainer}/>
-        <Redirect to="/404"/>
+        <Route exact path="/login" component={LoginContainer} />
+        <Route exact path="/wallet" component={MainWalletContainer} />
+        <Route path="/" component={LoginContainer} />
+        <Redirect to="/404" />
       </Switch>
-    )
+    );
   }
 }
 

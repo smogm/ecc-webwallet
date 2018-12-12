@@ -13,7 +13,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const middlewares = [
   thunk,
-  sagaMiddleware  
+  sagaMiddleware,
 ];
 
 if (process.env.NODE_ENV === 'development') {
@@ -26,11 +26,10 @@ const enhancers = [
 
 // If Redux DevTools Extension is installed use it, otherwise use Redux compose
 /* eslint-disable no-underscore-dangle */
-const composeEnhancers =
-  process.env.NODE_ENV !== 'production' &&
-  typeof window === 'object' &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
+const composeEnhancers =  process.env.NODE_ENV !== 'production'
+  && typeof window === 'object'
+  && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 /* eslint-enable */
 
 const store = createStore(
@@ -41,5 +40,4 @@ const store = createStore(
 
 sagaMiddleware.run(sagas);
 // store.subscribe(throttle(() => saveState(store.getState()), 1000)); // will uncomment when we want to make redux state as persistence
-export default store
-
+export default store;

@@ -1,14 +1,14 @@
 // @flow
 
-import { set, isEmpty} from 'lodash';
+import { set, isEmpty } from 'lodash';
 import { apiEndpoint } from './constants';
 
-export async function ApiService({ api, third_party, method, params }) {
+export async function ApiService({ api, thirdParty, method, params }) {
   const headers = {};
 
   let path = `${apiEndpoint}${api}`;
 
-  if (third_party) {
+  if (thirdParty) {
     path = api;
   }
 
@@ -23,24 +23,24 @@ export async function ApiService({ api, third_party, method, params }) {
   if (!isEmpty(params)) {
     reqBody.body = JSON.stringify(params);
   }
-  
+
   return fetch(path, reqBody)
     .then(response => {
       return response.json();
     })
-    .then((data) => {
-      if (third_party) {
+    .then(data => {
+      if (thirdParty) {
         return {
           result: 'ok',
-          data
+          data,
         };
       }
       return data;
     })
-    .catch((error) => {
+    .catch(() => {
       return {
         result: 'error',
-        message: 'Please check your internet connection!'
+        message: 'Please check your internet connection!',
       };
     });
 }
