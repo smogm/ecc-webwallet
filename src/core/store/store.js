@@ -4,9 +4,9 @@ import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
 import sagas from './sagas';
-// import { loadState, saveState } from "../../services/localStorage";
+// import { loadState, saveState } from "../../services/localStorage"; // will uncomment when we want to make redux state as persistence
 import rootReducer from './reducers';
-// import {throttle} from "lodash";
+// import {throttle} from "lodash"; // will uncomment when we want to make redux state as persistence
 
 // const persistedState = loadState();
 const sagaMiddleware = createSagaMiddleware();
@@ -35,11 +35,11 @@ const composeEnhancers =
 
 const store = createStore(
   rootReducer,
-  // persistedState,
+  // persistedState, // will uncomment when we want to make redux state as persistence
   composeEnhancers(...enhancers),
 );
 
 sagaMiddleware.run(sagas);
-// store.subscribe(throttle(() => saveState(store.getState()), 1000));
+// store.subscribe(throttle(() => saveState(store.getState()), 1000)); // will uncomment when we want to make redux state as persistence
 export default store
 
