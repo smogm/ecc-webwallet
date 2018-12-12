@@ -4,11 +4,11 @@ import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
 import sagas from './sagas';
-import {loadState, saveState} from "../../services/localStorage";
+import { saveState } from "../../services/localStorage";
 import rootReducer from './reducers';
 import {throttle} from "lodash";
 
-const persistedState = loadState();
+// const persistedState = loadState();
 const sagaMiddleware = createSagaMiddleware();
 
 const middlewares = [
@@ -35,7 +35,7 @@ const composeEnhancers =
 
 const store = createStore(
   rootReducer,
-  persistedState,
+  // persistedState,
   composeEnhancers(...enhancers),
 );
 
