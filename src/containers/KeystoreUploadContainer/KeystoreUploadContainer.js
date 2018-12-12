@@ -3,7 +3,10 @@ import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connectWallet, walletActionCreators } from 'core';
 import { promisify } from '../../utilities';
-import { generateAddress } from '../../services/lib/bitcoinjs-lib.js';
+import { importAddressFromWif } from '../../services/lib/bitcoinjs-lib.js';
+import { importKeyStore } from '../../services/lib/keystore-lib.js';
+import { Base64Decode } from '../../services/common.js';
+
 import { Row, Col, Icon, Button, Input, Layout } from 'antd';
 import logo from 'assets/img/logo.png';
 
@@ -16,6 +19,7 @@ class KeystoreUploadContainer extends PureComponent {
       selectedFile: '',
       fileData: '',
       password: '',
+      keyObject: null,
       isValidPwd: true
     }
   }
@@ -31,7 +35,7 @@ class KeystoreUploadContainer extends PureComponent {
       };
       reader.readAsDataURL(file);
       setTimeout(function() {
-        console.log('fileData', _.state.fileData)
+        _.setState({ keyObject:  Base64Decode(_.state.fileData.substring(_.state.fileData.indexOf(',') + 1))});
       }, 1000);
     }
   }
@@ -52,17 +56,25 @@ class KeystoreUploadContainer extends PureComponent {
   }
 
   unlockWallet = () => {
-    if (this.state.password !== '' && this.state.password === 'bitcoingreen') {
-      this.setState({ isValidPwd: true });
-      let genAddrObj = generateAddress();
-      promisify(this.props.createWallet, {
-        address: genAddrObj.address,
-        privateKey: genAddrObj.privateKey
-      })
-        .then((res) => {
-          this.props.history.push('/wallet');
-        })
-        .catch(e => console.log(e));
+    if (this.state.password !== '') {
+      if (this.state.keyObject) {
+        importKeyStore(this.state.password, this.state.keyObject)
+          .then((privateKey) => {
+            let address = importAddressFromWif(privateKey);
+            promisify(this.props.createWallet, {
+              address: address,
+              privateKey: privateKey
+            })
+              .then((res) => {
+                this.setState({ isValidPwd: true });
+                this.props.history.push('/wallet');
+              })
+              .catch(e => console.log(e));
+          })
+          .catch((err) => {
+            this.setState({ isValidPwd: false });
+          });
+      }
     } else {
       this.setState({ isValidPwd: false });
     }

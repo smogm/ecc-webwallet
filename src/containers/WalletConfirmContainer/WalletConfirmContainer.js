@@ -5,22 +5,60 @@ import { Row, Col, Icon, Button, Input, Layout } from 'antd';
 import { connectWallet, walletActionCreators } from 'core';
 import { promisify } from '../../utilities';
 import { generateAddress } from '../../services/lib/bitcoinjs-lib.js';
+import { exportKeyStore } from '../../services/lib/keystore-lib.js';
 import logo from 'assets/img/logo.png';
 
 const { Content, Header } = Layout;
 
 class WalletConfirmContainer extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      password: ''
+    }
+  }
+
   showWalletPage = () => {
-    //Test Address: GTsqojGaG2sy4uUTwyqwjxDtaVaF9ja5DV
+    //Test Address: GTsqojGaG2sy4uUTwyqwjxDtaVaF9ja5DV 
     let genAddrObj = generateAddress();
     promisify(this.props.createWallet, {
       address: genAddrObj.address,
       privateKey: genAddrObj.privateKey
     })
       .then((res) => {
+        let keyObject = exportKeyStore(genAddrObj.privateKey, this.state.password);
+        this.exportToJson(keyObject);
         this.props.history.push('/wallet');
       })
       .catch(e => console.log(e));
+  }
+
+  exportToJson = (keyObject) => {
+    let filename = "keyStore.json";
+    let contentType = "application/json;charset=utf-8;";
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+      var blob = new Blob([decodeURIComponent(encodeURI(keyObject))], { type: contentType });
+      navigator.msSaveOrOpenBlob(blob, filename);
+    } else {
+      var a = document.createElement('a');
+      a.download = filename;
+      a.href = 'data:' + contentType + ',' + encodeURIComponent(JSON.stringify(keyObject));
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  }
+
+  onChangeData = (type, evt) => {
+    switch(type) {
+      case 'password':
+        this.setState({ password: evt.target.value });
+        break;
+      default:
+        this.setState({ password: '' });
+        break;
+    }
   }
 
   render () {
@@ -41,7 +79,7 @@ class WalletConfirmContainer extends PureComponent {
                   <span>Add a password to save your wallet</span>
                 </Col>
                 <Col className="wallet_password center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
-                  <Input addonAfter={<Icon type="setting" />} addonBefore={<Icon type="setting" />} type="password" />
+                  <Input addonAfter={<Icon type="setting" />} onChange={(evt) => this.onChangeData('password', evt)} addonBefore={<Icon type="setting" />} type="password" />
                 </Col>
                 <Col className="center" sm={{ span: 4, offset: 10 }} xs={{ span: 6, offset:8 }}>
                   <Button onClick={this.showWalletPage}>Save</Button>
