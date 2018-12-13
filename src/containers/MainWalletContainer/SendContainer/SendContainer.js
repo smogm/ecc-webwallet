@@ -14,7 +14,7 @@ class SendContainer extends PureComponent {
     this.state = {
       addressTo: '',
       txValue: '',
-      feeAmount: '1.200',
+      feeAmount: '1.200', //  ToDo: feeAmount will replace with real value after getting fee from api
       errMsg: '',
     };
   }
