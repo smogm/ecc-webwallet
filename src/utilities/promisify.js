@@ -3,4 +3,3 @@ export function promisify(fn, ...args) {
       fn.apply(null, [...args, resolve, reject]);
   });
 }
-  

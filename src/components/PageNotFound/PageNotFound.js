@@ -1,8 +1,9 @@
 import React from 'react';
 
-const PageNotFound = ({...props}) => (
+const PageNotFound = () => (
   <div className="">
-    404 Error<br/>
+    404 Error
+    <br />
     Page Not Found
   </div>
 );

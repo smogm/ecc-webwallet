@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react'; 
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Row, Col, Button, Layout } from 'antd';
 import logo from 'assets/img/logo.png';
 
-const { Content, Header } = Layout;
+const { Content } = Layout;
 
 class LoginContainer extends PureComponent {
   showWalletConfirm = () => {
@@ -13,17 +14,15 @@ class LoginContainer extends PureComponent {
     this.props.history.push('/unlock');
   }
 
-  render () {
+  render() {
     return (
       <div className="block">
         <Layout>
-          <Header className="header">
-          </Header>
           <Layout>
             <Content className="main">
               <Row className="logo_area">
                 <Col className="center" sm={{ span: 22, offset: 1 }}>
-                  <img alt="true" src={logo} className="logo"/>
+                  <img alt="true" src={logo} className="logo" />
                 </Col>
               </Row>
               <Row className="wallet_btn_area">
@@ -42,7 +41,15 @@ class LoginContainer extends PureComponent {
         </Layout>
       </div>
     );
-  }  
+  }
 }
+
+LoginContainer.propTypes = {
+  history: PropTypes.object,
+};
+
+LoginContainer.defaultProps = {
+  history: PropTypes.object,
+};
 
 export default LoginContainer;

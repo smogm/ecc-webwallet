@@ -1,41 +1,41 @@
-import React, { PureComponent } from 'react'; 
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connectWallet, walletActionCreators } from 'core';
-import { promisify } from '../../../utilities';
 import { Row, Col, Input, Icon, Button, Layout } from 'antd';
+import { promisify } from '../../../utilities';
 
-const { Content} = Layout;
+const { Content } = Layout;
 
 class SendContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      bitgBalance: 0,
-      feeAmount: '1.200'
-    }
+      feeAmount: '1.200',
+    };
   }
 
   componentDidMount() {
     const { wallet } = this.props;
     promisify(this.props.getBalance, {
-      address: wallet.address
+      address: wallet.address,
     })
-      .then((res) => {     
+      .then(() => {
       })
       .catch(e => console.log(e));
-    
+
     setTimeout(() => {
       promisify(this.props.getUtxos, {
-        address: wallet.address
+        address: wallet.address,
       })
-        .then((res) => {
+        .then(() => {
         })
         .catch(e => console.log(e));
     }, 1000);
   }
 
-  render () {
+  render() {
     const { wallet } = this.props;
 
     return (
@@ -48,13 +48,16 @@ class SendContainer extends PureComponent {
                   <span>Available Balance</span>
                 </Col>
                 <Col className="send_balance_label center">
-                  <span>{ wallet.balance ? wallet.balance : 0 } BITG</span>
+                  <span>
+                    { wallet.balance ? wallet.balance : 0 }
+                    BITG
+                  </span>
                 </Col>
                 <Col className="send_to" sm={{ span: 18, offset: 3 }}>
                   <Input addonBefore={<span>To:</span>} addonAfter={<Icon type="setting" />} type="text" />
                 </Col>
                 <Col className="send_amount" sm={{ span: 18, offset: 3 }}>
-                  <Input addonBefore={<span>Amount:</span>} addonAfter={<span></span>} type="text" />
+                  <Input addonBefore={<span>Amount:</span>} addonAfter={<Icon type="setting" />} type="text" />
                 </Col>
                 <Col className="send_fee_area" sm={{ span: 18, offset: 3 }}>
                   <Row>
@@ -62,7 +65,10 @@ class SendContainer extends PureComponent {
                       <span>Fee</span>
                     </Col>
                     <Col className="send_fee_amout" sm={{ span: 12 }} xs={{ span: 12 }}>
-                      <span><Icon type="caret-up" />{this.state.feeAmount}</span>
+                      <span>
+                        <Icon type="caret-up" />
+                        {this.state.feeAmount}
+                      </span>
                     </Col>
                   </Row>
                 </Col>
@@ -75,24 +81,36 @@ class SendContainer extends PureComponent {
         </Layout>
       </div>
     );
-  }  
+  }
 }
 
-const mapStateToProps = ({wallet}) => ({
-  wallet: wallet
+SendContainer.propTypes = {
+  wallet: PropTypes.object,
+  getBalance: PropTypes.func,
+  getUtxos: PropTypes.func,
+};
+
+SendContainer.defaultProps = {
+  wallet: PropTypes.object,
+  getBalance: PropTypes.func,
+  getUtxos: PropTypes.func,
+};
+
+const mapStateToProps = ({ wallet }) => ({
+  wallet,
 });
 
-const mapDisptachToProps = (dispatch) => {
+const mapDisptachToProps = dispatch => {
   const {
     getBalance,
-    getUtxos
-  } = walletActionCreators
+    getUtxos,
+  } = walletActionCreators;
 
   return bindActionCreators({
     getBalance,
-    getUtxos
+    getUtxos,
   }, dispatch);
-}
+};
 
 export default compose(
   connectWallet(mapStateToProps, mapDisptachToProps),

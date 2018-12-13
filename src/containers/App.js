@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { store } from 'core';
 import RoutesContainer from 'containers/RoutesContainer/RoutesContainer';
-import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
+import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 import PageNotFound from 'components/PageNotFound/PageNotFound';
 import LoginContainer from 'containers/LoginContainer/LoginContainer';
 import WalletConfirmContainer from 'containers/WalletConfirmContainer/WalletConfirmContainer';
@@ -19,11 +19,11 @@ class App extends Component {
           <div className="App">
             <div className="content">
               <Switch>
-                <Route path="/login" exact component={LoginContainer}/>
-                <Route exact path="/create" component={WalletConfirmContainer}/>
-                <Route exact path="/unlock" component={KeystoreUploadContainer}/>
-                <Route exact path="/404" component={PageNotFound}/>
-                <PrivateRoute path="/" component={RoutesContainer}/>
+                <Route path="/login" exact component={LoginContainer} />
+                <Route exact path="/create" component={WalletConfirmContainer} />
+                <Route exact path="/unlock" component={KeystoreUploadContainer} />
+                <Route exact path="/404" component={PageNotFound} />
+                <PrivateRoute path="/" component={RoutesContainer} />
               </Switch>
             </div>
           </div>

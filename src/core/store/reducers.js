@@ -2,12 +2,12 @@ import { combineReducers } from 'redux';
 
 import {
   auth,
-  wallet
+  wallet,
 } from '../modules';
 
 const rootReducer = combineReducers({
   auth,
-  wallet
+  wallet,
 });
 
 export default rootReducer;

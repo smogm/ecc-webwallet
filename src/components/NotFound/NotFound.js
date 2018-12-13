@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NotFound = ({...props}) => (
+const NotFound = () => (
   <div className="">
     Entry Not Found
   </div>
