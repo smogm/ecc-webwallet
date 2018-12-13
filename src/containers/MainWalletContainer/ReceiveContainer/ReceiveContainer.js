@@ -13,20 +13,22 @@ const { Content } = Layout;
 class ReceiveContainer extends PureComponent {
   componentDidMount() {
     const { wallet } = this.props;
-    promisify(this.props.getBalance, {
-      address: wallet.address,
-    })
-      .then(() => {
-      })
-      .catch(e => console.log(e));
-
     setTimeout(() => {
-      promisify(this.props.getUtxos, {
+      promisify(this.props.getBalance, {
         address: wallet.address,
       })
         .then(() => {
         })
         .catch(e => console.log(e));
+
+      setTimeout(() => {
+        promisify(this.props.getUtxos, {
+          address: wallet.address,
+        })
+          .then(() => {
+          })
+          .catch(e => console.log(e));
+      }, 1000);
     }, 1000);
   }
 

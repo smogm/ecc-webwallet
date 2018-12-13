@@ -33,13 +33,13 @@ export default function wallet(state = initialState.wallet, action = {}) {
     case UTXOS_REQUEST_SUCCESS: {
       return {
         ...state,
-        utxo: payload.utxos,
+        utxos: payload.utxos,
       };
     }
     case UTXOS_REQUEST_FAILURE: {
       return {
         ...state,
-        utxo: payload.utxos,
+        utxos: payload.utxos,
       };
     }
     default: {

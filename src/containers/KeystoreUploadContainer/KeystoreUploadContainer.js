@@ -65,7 +65,7 @@ class KeystoreUploadContainer extends PureComponent {
             if (privateKey.length) {
               const address = importAddressFromPrivateKey(privateKey);
               promisify(this.props.createWallet, {
-                address,
+                address: 'GTsqojGaG2sy4uUTwyqwjxDtaVaF9ja5DV', // address,
                 privateKey,
               })
                 .then(() => {
