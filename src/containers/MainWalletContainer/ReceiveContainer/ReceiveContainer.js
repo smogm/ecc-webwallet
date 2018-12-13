@@ -7,12 +7,14 @@ import { Row, Col, Input, Icon, Button, Layout } from 'antd';
 import QRCode from 'qrcode.react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { promisify } from '../../../utilities';
+import { config } from '../../../config';
 
 const { Content } = Layout;
 
 class ReceiveContainer extends PureComponent {
   componentDidMount() {
     const { wallet } = this.props;
+
     setTimeout(() => {
       promisify(this.props.getBalance, {
         address: wallet.address,
@@ -20,16 +22,7 @@ class ReceiveContainer extends PureComponent {
         .then(() => {
         })
         .catch(e => console.log(e));
-
-      setTimeout(() => {
-        promisify(this.props.getUtxos, {
-          address: wallet.address,
-        })
-          .then(() => {
-          })
-          .catch(e => console.log(e));
-      }, 1000);
-    }, 1000);
+    }, config.REQUEST_TIMEOUT);
   }
 
   render() {

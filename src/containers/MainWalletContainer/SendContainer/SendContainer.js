@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connectWallet, walletActionCreators } from 'core';
 import { Row, Col, Input, Icon, Button, Layout } from 'antd';
 import { promisify } from '../../../utilities';
+import { config } from '../../../config';
 
 const { Content } = Layout;
 
@@ -21,6 +22,7 @@ class SendContainer extends PureComponent {
 
   componentDidMount() {
     const { wallet } = this.props;
+
     setTimeout(() => {
       promisify(this.props.getBalance, {
         address: wallet.address,
@@ -28,16 +30,7 @@ class SendContainer extends PureComponent {
         .then(() => {
         })
         .catch(e => console.log(e));
-
-      setTimeout(() => {
-        promisify(this.props.getUtxos, {
-          address: wallet.address,
-        })
-          .then(() => {
-          })
-          .catch(e => console.log(e));
-      }, 1000);
-    }, 1000);
+    }, config.REQUEST_TIMEOUT);
   }
 
   onChangeData = (type, evt) => {
@@ -67,17 +60,25 @@ class SendContainer extends PureComponent {
       this.setState({ errMsg: 'Insufficient Funds' });
     } else {
       this.setState({ errMsg: '' });
-      const txUtxos = [];
-      let txUtxoValue = 0;
 
-      for (let i = 0; i < wallet.utxos.length; i += 1) {
-        txUtxos.push(wallet.utxos[i]);
-        txUtxoValue += wallet.utxos[i].value;
-        if (txUtxoValue > this.state.txValue) {
-          this.processTransaction(txUtxos);
-          break;
-        }
-      }
+      promisify(this.props.getUtxos, {
+        address: wallet.address,
+      })
+        .then(() => {
+          const txUtxos = [];
+          let txUtxoValue = 0;
+          const { wallet } = this.props;
+
+          for (let i = 0; i < wallet.utxos.length; i += 1) {
+            txUtxos.push(wallet.utxos[i]);
+            txUtxoValue += wallet.utxos[i].value;
+            if (txUtxoValue > this.state.txValue) {
+              this.processTransaction(txUtxos);
+              break;
+            }
+          }
+        })
+        .catch(e => console.log(e));
     }
   }
 
