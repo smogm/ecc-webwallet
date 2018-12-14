@@ -1,3 +1,3 @@
 export const config = {
-    FEE_AMOUNT: 0.001,
+    FEE_AMOUNT: 0.00001,
 };

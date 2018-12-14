@@ -25,14 +25,17 @@ export const importAddressFromPrivateKey = privateKey => {
   return address;
 };
 
-export const setTransaction = (txUtxos, txUtxoValue, amount, receiveAddress, senderAddress) => {
+export const setTransaction = (txUtxos, txUtxoValue, amount, receiveAddress, senderAddress, privateKey) => {
   const rawTransaction = new bitcoin.TransactionBuilder();
+  const keyPair = bitcoin.ECPair.fromPrivateKey(privateKey);
   for (let i = 0; i < txUtxos.length; i += 1) {
-    rawTransaction.addInput(txUtxos[i].txId, txUtxos[i].vout);
+    rawTransaction.addInput(txUtxos[i].txid, txUtxos[i].vout);
   }
-
   const change = txUtxoValue - amount - config.FEE_AMOUNT;
-  rawTransaction.addOutput(receiveAddress, amount);
-  rawTransaction.addOutput(senderAddress, change);
+  rawTransaction.addOutput(receiveAddress, parseInt(+amount * (10 ** 8), 10));
+  rawTransaction.addOutput(senderAddress, parseInt(+change * (10 ** 8), 10));
+  for (let i = 0; i < txUtxos.length; i += 1) {
+    rawTransaction.sign(i, keyPair);
+  }
   return rawTransaction;
 };

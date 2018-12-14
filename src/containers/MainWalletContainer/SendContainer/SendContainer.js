@@ -6,6 +6,7 @@ import { connectWallet, walletActionCreators } from 'core';
 import { Row, Col, Input, Icon, Button, Layout } from 'antd';
 import { setTransaction } from '../../../services/lib/bitcoingreen-lib';
 import { promisify } from '../../../utilities';
+import { config } from '../../../config';
 
 const { Content } = Layout;
 
@@ -15,7 +16,6 @@ class SendContainer extends PureComponent {
     this.state = {
       addressTo: '',
       txValue: '',
-      feeAmount: '1.200', //  ToDo: feeAmount will replace with real value after getting fee from api
       errMsg: '',
     };
   }
@@ -75,15 +75,15 @@ class SendContainer extends PureComponent {
             }
           }
         })
-        .catch(() => {
-          this.setState({ errMsg: 'Invalid address' });
+        .catch(err => {
+          this.setState({ errMsg: err.message ? err.message : 'Invalid address' });
         });
     }
   }
 
   processTransaction = (txUtxos, txUtxoValue, amount) => {
     const { wallet } = this.props;
-    setTransaction(txUtxos, txUtxoValue, amount, this.state.addressTo, wallet.address);
+    setTransaction(txUtxos, txUtxoValue, amount, this.state.addressTo, wallet.address, wallet.privateKey);
   }
 
   render() {
@@ -126,7 +126,7 @@ class SendContainer extends PureComponent {
                       <Col className="send_fee_amout" sm={{ span: 12 }} xs={{ span: 12 }}>
                         <span>
                           <Icon type="caret-up" />
-                          {this.state.feeAmount}
+                          {config.FEE_AMOUNT}
                         </span>
                       </Col>
                     </Row>
