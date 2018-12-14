@@ -30,10 +30,12 @@ export const setTransaction = (txUtxos, txUtxoValue, amount, receiveAddress, sen
   const keyPair = bitcoin.ECPair.fromPrivateKey(privateKey);
   for (let i = 0; i < txUtxos.length; i += 1) {
     rawTransaction.addInput(txUtxos[i].txid, txUtxos[i].vout);
-    rawTransaction.sign(i, keyPair);
   }
   const change = txUtxoValue - amount - config.FEE_AMOUNT;
-  rawTransaction.addOutput(receiveAddress, +amount / 0.00000001);
-  rawTransaction.addOutput(senderAddress, +change / 0.00000001);
+  rawTransaction.addOutput(receiveAddress, parseInt(+amount * (10 ** 8), 10));
+  rawTransaction.addOutput(senderAddress, parseInt(+change * (10 ** 8), 10));
+  for (let i = 0; i < txUtxos.length; i += 1) {
+    rawTransaction.sign(i, keyPair);
+  }
   return rawTransaction;
 };

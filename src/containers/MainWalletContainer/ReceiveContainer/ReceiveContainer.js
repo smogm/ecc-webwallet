@@ -42,7 +42,7 @@ class ReceiveContainer extends PureComponent {
                 <Col className="receive_qrcode center">
                   <QRCode value={wallet.address ? wallet.address : ''} />
                 </Col>
-                <Col className="receive_address_area" sm={{ span: 20, offset: 2 }}>
+                <Col className="receive_address_area" sm={{ span: 22, offset: 1 }}>
                   <Row className="clipboard_cpy_area">
                     <Col className="receive_address" sm={{ span: 18 }} xs={{ span: 16 }}>
                       <Input value={wallet.address ? wallet.address : ''} readOnly />
