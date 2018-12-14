@@ -6,7 +6,7 @@ import { connectWallet, walletActionCreators } from 'core';
 import { Row, Col, Icon, Button, Input, Layout } from 'antd';
 import logo from 'assets/img/logo.png';
 import { promisify } from '../../utilities';
-import { importAddressFromPrivateKey } from '../../services/lib/bitcoinjs-lib';
+import { importAddressFromPrivateKey } from '../../services/lib/bitcoingreen-lib';
 import { importKeyStore } from '../../services/lib/keystore-lib';
 import { Base64Decode } from '../../services/common';
 
