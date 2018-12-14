@@ -4,6 +4,7 @@ import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connectWallet, walletActionCreators } from 'core';
 import { Row, Col, Input, Icon, Button, Layout } from 'antd';
+import { setTransaction } from '../../../services/lib/bitcoingreen-lib';
 import { promisify } from '../../../utilities';
 
 const { Content } = Layout;
@@ -67,19 +68,22 @@ class SendContainer extends PureComponent {
 
           for (let i = 0; i < wallet.utxos.length; i += 1) {
             txUtxos.push(wallet.utxos[i]);
-            txUtxoValue += wallet.utxos[i].value;
+            txUtxoValue += +wallet.utxos[i].value;
             if (txUtxoValue > this.state.txValue) {
-              this.processTransaction(txUtxos);
+              this.processTransaction(txUtxos, txUtxoValue, this.state.txValue);
               break;
             }
           }
         })
-        .catch(e => console.log(e));
+        .catch(() => {
+          this.setState({ errMsg: 'Invalid address' });
+        });
     }
   }
 
-  processTransaction = txUtxos => {
-    console.log('txUtxos', txUtxos);
+  processTransaction = (txUtxos, txUtxoValue, amount) => {
+    const { wallet } = this.props;
+    setTransaction(txUtxos, txUtxoValue, amount, this.state.addressTo, wallet.address);
   }
 
   render() {
