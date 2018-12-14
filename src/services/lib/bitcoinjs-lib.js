@@ -1,4 +1,4 @@
-const bitcoin = require('bitcoinjs-lib');
+const bitcoin = require('bitcoingreenjs-lib-test'); // ToDo: This package is test lib. It should be updated with released bitcoingreenjs-lib
 
 function randomStr() {
   let text = '';
