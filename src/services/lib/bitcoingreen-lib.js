@@ -34,4 +34,5 @@ export const setTransaction = (txUtxos, txUtxoValue, amount, receiveAddress, sen
   const change = txUtxoValue - amount - config.FEE_AMOUNT;
   rawTransaction.addOutput(receiveAddress, amount);
   rawTransaction.addOutput(senderAddress, change);
+  return rawTransaction;
 };
