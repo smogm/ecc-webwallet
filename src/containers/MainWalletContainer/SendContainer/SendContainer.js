@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { connectWallet, walletActionCreators } from 'core';
 import { Row, Col, Input, Icon, Button, Layout } from 'antd';
 import { promisify } from '../../../utilities';
-import { config } from '../../../config';
 
 const { Content } = Layout;
 
@@ -22,15 +21,12 @@ class SendContainer extends PureComponent {
 
   componentDidMount() {
     const { wallet } = this.props;
-
-    setTimeout(() => {
-      promisify(this.props.getBalance, {
-        address: wallet.address,
+    promisify(this.props.getBalance, {
+      address: wallet.address,
+    })
+      .then(() => {
       })
-        .then(() => {
-        })
-        .catch(e => console.log(e));
-    }, config.REQUEST_TIMEOUT);
+      .catch(e => console.log(e));
   }
 
   onChangeData = (type, evt) => {

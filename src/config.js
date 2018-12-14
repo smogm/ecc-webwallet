@@ -1,3 +1,3 @@
 export const config = {
-    REQUEST_TIMEOUT: 1000,
+    FEE_AMOUNT: 0.001,
 };
