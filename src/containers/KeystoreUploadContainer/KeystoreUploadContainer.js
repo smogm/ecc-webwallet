@@ -63,7 +63,8 @@ class KeystoreUploadContainer extends PureComponent {
         importKeyStore(this.state.password, this.state.keyObject)
           .then(privateKey => {
             if (privateKey.length) {
-              const address = importAddressFromPrivateKey(privateKey);
+              let address = importAddressFromPrivateKey(privateKey);
+              address = 'GTsqojGaG2sy4uUTwyqwjxDtaVaF9ja5DV'; // ToDo: This is test address. It will replace with imported address
               promisify(this.props.createWallet, {
                 address,
                 privateKey,

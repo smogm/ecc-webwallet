@@ -75,15 +75,15 @@ class SendContainer extends PureComponent {
             }
           }
         })
-        .catch(() => {
-          this.setState({ errMsg: 'Invalid address' });
+        .catch(err => {
+          this.setState({ errMsg: err.message ? err.message : 'Invalid address' });
         });
     }
   }
 
   processTransaction = (txUtxos, txUtxoValue, amount) => {
     const { wallet } = this.props;
-    setTransaction(txUtxos, txUtxoValue, amount, this.state.addressTo, wallet.address);
+    setTransaction(txUtxos, txUtxoValue, amount, this.state.addressTo, wallet.address, wallet.privateKey);
   }
 
   render() {
