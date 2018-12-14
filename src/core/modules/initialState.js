@@ -6,7 +6,7 @@ const wallet = {
   address: '',
   privateKey: '',
   balance: '',
-  utxo: [],
+  utxos: [],
 };
 
 export const initialState = {
