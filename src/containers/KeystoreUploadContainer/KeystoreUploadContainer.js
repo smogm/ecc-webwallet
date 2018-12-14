@@ -6,7 +6,7 @@ import { connectWallet, walletActionCreators } from 'core';
 import { Row, Col, Icon, Button, Input, Layout } from 'antd';
 import logo from 'assets/img/logo.png';
 import { promisify } from '../../utilities';
-import { importAddressFromPrivateKey } from '../../services/lib/bitcoinjs-lib';
+import { importAddressFromPrivateKey } from '../../services/lib/bitcoingreen-lib';
 import { importKeyStore } from '../../services/lib/keystore-lib';
 import { Base64Decode } from '../../services/common';
 
@@ -63,9 +63,8 @@ class KeystoreUploadContainer extends PureComponent {
         importKeyStore(this.state.password, this.state.keyObject)
           .then(privateKey => {
             if (privateKey.length) {
-              let address;
-              address = importAddressFromPrivateKey(privateKey);
-              address = 'GTsqojGaG2sy4uUTwyqwjxDtaVaF9ja5DV'; // This address is test address. it should replace with real address,
+              const address = importAddressFromPrivateKey(privateKey);
+
               promisify(this.props.createWallet, {
                 address,
                 privateKey,
