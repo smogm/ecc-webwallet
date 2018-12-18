@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connectWallet, walletActionCreators } from 'core';
 import { Row, Col, Input, Icon, Button, Layout } from 'antd';
-import { setTransaction } from '../../../services/lib/bitcoingreen-lib';
+import { setTransaction, submitTransaction } from '../../../services/lib/bitcoingreen-lib';
 import { promisify } from '../../../utilities';
 import { config } from '../../../config';
 
@@ -83,7 +83,8 @@ class SendContainer extends PureComponent {
 
   processTransaction = (txUtxos, txUtxoValue, amount) => {
     const { wallet } = this.props;
-    setTransaction(txUtxos, txUtxoValue, amount, this.state.addressTo, wallet.address, wallet.privateKey);
+    const rawTransaction = setTransaction(txUtxos, txUtxoValue, amount, this.state.addressTo, wallet.address, wallet.privateKey);
+    submitTransaction(rawTransaction);
   }
 
   render() {

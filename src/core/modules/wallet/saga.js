@@ -30,7 +30,7 @@ export function* asyncWalletBalanceRequest({ payload, resolve, reject }) {
     const response = yield call(ApiService,
       {
         api: `https://www.coinexplorer.net/api/v1/BITG/address/balance?address=${address}`,
-        third_party: true,
+        thirdParty: true,
         method: 'GET',
         params: {},
       });
@@ -52,7 +52,7 @@ export function* asyncWalletUtxoRequest({ payload, resolve, reject }) {
     const response = yield call(ApiService,
       {
         api: `https://www.coinexplorer.net/api/v1/BITG/address/unspent?address=${address}`,
-        third_party: true,
+        thirdParty: true,
         method: 'GET',
         params: {},
       });
