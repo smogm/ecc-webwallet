@@ -98,64 +98,62 @@ class SendContainer extends PureComponent {
     return (
       <div className="block">
         <Layout>
-          <Layout>
-            <Content className="main">
-              <Row className="send_area">
-                <form onSubmit={this.submitTransaction}>
-                  <Col className="send_label center">
-                    <span>Available Balance</span>
-                  </Col>
-                  <Col className="send_balance_label center">
-                    <span>
-                      { wallet.balance ? wallet.balance : 0 }
-                      BITG
-                    </span>
-                  </Col>
-                  <Col className="send_to" sm={{ span: 18, offset: 3 }}>
-                    <Input addonBefore={<span>To:</span>} onChange={evt => this.onChangeData('addressTo', evt)} addonAfter={<Icon type="setting" />} type="text" />
-                  </Col>
-                  <Col className="send_amount" sm={{ span: 18, offset: 3 }}>
-                    <Input addonBefore={<span>Amount:</span>} onChange={evt => this.onChangeData('amount', evt)} addonAfter={<Icon type="setting" />} type="number" />
-                  </Col>
-                  {
-                    this.state.errMsg !== '' ? (
-                      <Col className="invalid_msg" sm={{ span: 18, offset: 3 }}>
-                        <span>{this.state.errMsg}</span>
-                      </Col>
-                    ) : null
-                  }
-                  {
-                    this.state.txStatus === 'success' ? (
-                      <Col className="tx_send_success success_msg" sm={{ span: 18, offset: 3 }}>
-                        <p>
-                          Tx Hash:
-                        </p>
-                        <p>
-                          {this.state.txHash}
-                        </p>
-                      </Col>
-                    ) : null
-                  }
-                  <Col className="send_fee_area" sm={{ span: 18, offset: 3 }}>
-                    <Row>
-                      <Col className="send_fee" sm={{ span: 12 }} xs={{ span: 12 }}>
-                        <span>Fee</span>
-                      </Col>
-                      <Col className="send_fee_amout" sm={{ span: 12 }} xs={{ span: 12 }}>
-                        <span>
-                          <Icon type="caret-up" />
-                          {config.FEE_AMOUNT}
-                        </span>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col className="submit_transaction center" sm={{ span: 18, offset: 3 }}>
-                    <Button onClick={this.submitTransaction}>Submit Transaction</Button>
-                  </Col>
-                </form>
-              </Row>
-            </Content>
-          </Layout>
+          <Content className="main">
+            <Row className="send_area">
+              <form onSubmit={this.submitTransaction}>
+                <Col className="send_label center">
+                  <span>Available Balance</span>
+                </Col>
+                <Col className="send_balance_label center">
+                  <span>
+                    { wallet.balance ? wallet.balance : 0 }
+                    BITG
+                  </span>
+                </Col>
+                <Col className="send_to" sm={{ span: 18, offset: 3 }}>
+                  <Input addonBefore={<span>To:</span>} onChange={evt => this.onChangeData('addressTo', evt)} addonAfter={<Icon type="setting" />} type="text" />
+                </Col>
+                <Col className="send_amount" sm={{ span: 18, offset: 3 }}>
+                  <Input addonBefore={<span>Amount:</span>} onChange={evt => this.onChangeData('amount', evt)} addonAfter={<Icon type="setting" />} type="number" />
+                </Col>
+                {
+                  this.state.errMsg !== '' ? (
+                    <Col className="invalid_msg" sm={{ span: 18, offset: 3 }}>
+                      <span>{this.state.errMsg}</span>
+                    </Col>
+                  ) : null
+                }
+                {
+                  this.state.txStatus === 'success' ? (
+                    <Col className="tx_send_success success_msg" sm={{ span: 18, offset: 3 }}>
+                      <p>
+                        Tx Hash:
+                      </p>
+                      <p>
+                        {this.state.txHash}
+                      </p>
+                    </Col>
+                  ) : null
+                }
+                <Col className="send_fee_area" sm={{ span: 18, offset: 3 }}>
+                  <Row>
+                    <Col className="send_fee" sm={{ span: 12 }} xs={{ span: 12 }}>
+                      <span>Fee</span>
+                    </Col>
+                    <Col className="send_fee_amout" sm={{ span: 12 }} xs={{ span: 12 }}>
+                      <span>
+                        <Icon type="caret-up" />
+                        {config.FEE_AMOUNT}
+                      </span>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col className="submit_transaction center" sm={{ span: 18, offset: 3 }}>
+                  <Button onClick={this.submitTransaction}>Submit Transaction</Button>
+                </Col>
+              </form>
+            </Row>
+          </Content>
         </Layout>
       </div>
     );
