@@ -17,10 +17,16 @@ class SendContainer extends PureComponent {
       addressTo: '',
       txValue: '',
       errMsg: '',
+      txStatus: 'pending',
+      txHash: '',
     };
   }
 
   componentDidMount() {
+    this.getBalance();
+  }
+
+  getBalance = () => {
     const { wallet } = this.props;
     promisify(this.props.getBalance, {
       address: wallet.address,
@@ -84,7 +90,21 @@ class SendContainer extends PureComponent {
   processTransaction = (txUtxos, txUtxoValue, amount) => {
     const { wallet } = this.props;
     const rawTransaction = setTransaction(txUtxos, txUtxoValue, amount, this.state.addressTo, wallet.address, wallet.privateKey);
-    submitTransaction(rawTransaction);
+    submitTransaction(rawTransaction)
+    .then(res => {
+      if (res.status === 200) {
+        this.setState({ txStatus: 'success', txHash: res.data.data });
+        setTimeout(() => {
+          this.setState({ txStatus: 'pending', txHash: '' });
+        }, 1000 * 20);
+      } else {
+        this.setState({ txStatus: 'fail', errMsg: res.data.message });
+      }
+    })
+    .catch(err => {
+      console.log('error', err);
+      this.setState({ txStatus: 'fail', errMsg: err.message ? err.message : '' });
+    });
   }
 
   render() {
@@ -116,6 +136,18 @@ class SendContainer extends PureComponent {
                     this.state.errMsg !== '' ? (
                       <Col className="invalid_msg" sm={{ span: 18, offset: 3 }}>
                         <span>{this.state.errMsg}</span>
+                      </Col>
+                    ) : null
+                  }
+                  {
+                    this.state.txStatus === 'success' ? (
+                      <Col className="tx_send_success success_msg" sm={{ span: 18, offset: 3 }}>
+                        <p>
+                          Tx Hash:
+                        </p>
+                        <p>
+                          {this.state.txHash}
+                        </p>
                       </Col>
                     ) : null
                   }

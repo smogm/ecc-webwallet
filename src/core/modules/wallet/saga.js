@@ -34,6 +34,8 @@ export function* asyncWalletBalanceRequest({ payload, resolve, reject }) {
         method: 'GET',
         params: {},
       });
+    console.log('response', response);
+    console.log('address', address);
     if (response.success) {
       yield put(walletActionCreators.getBalanceSuccess({ balance: response.result[address] }));
       resolve(response.result);
