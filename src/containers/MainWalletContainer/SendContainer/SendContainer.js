@@ -22,20 +22,6 @@ class SendContainer extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    this.getBalance();
-  }
-
-  getBalance = () => {
-    const { wallet } = this.props;
-    promisify(this.props.getBalance, {
-      address: wallet.address,
-    })
-      .then(() => {
-      })
-      .catch(e => console.log(e));
-  }
-
   onChangeData = (type, evt) => {
     switch (type) {
       case 'addressTo':
@@ -102,7 +88,6 @@ class SendContainer extends PureComponent {
       }
     })
     .catch(err => {
-      console.log('error', err);
       this.setState({ txStatus: 'fail', errMsg: err.message ? err.message : '' });
     });
   }

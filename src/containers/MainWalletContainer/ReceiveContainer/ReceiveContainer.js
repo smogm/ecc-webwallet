@@ -6,21 +6,10 @@ import { connectWallet, walletActionCreators } from 'core';
 import { Row, Col, Input, Icon, Button, Layout } from 'antd';
 import QRCode from 'qrcode.react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { promisify } from '../../../utilities';
 
 const { Content } = Layout;
 
 class ReceiveContainer extends PureComponent {
-  componentDidMount() {
-    const { wallet } = this.props;
-      promisify(this.props.getBalance, {
-        address: wallet.address,
-      })
-        .then(() => {
-        })
-        .catch(e => console.log(e));
-  }
-
   render() {
     const { wallet } = this.props;
 
