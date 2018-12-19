@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { config } from '../../config';
+import { apiEndpoint } from '../constants';
 
 const bitcoin = require('bitcoingreenjs-lib-test'); // ToDo: This package is test lib. It should be updated with released bitcoingreenjs-lib
 
@@ -38,4 +40,24 @@ export const setTransaction = (txUtxos, txUtxoValue, amount, receiveAddress, sen
     rawTransaction.sign(i, keyPair);
   }
   return rawTransaction;
+};
+
+export const submitTransaction = rawTransaction => {
+  const txHex = rawTransaction.build().toHex();
+  const url = `${apiEndpoint}/rpc/sendrawtransaction`;
+  return new Promise((resolve, reject) => {
+    axios({
+      method: 'post',
+      url,
+      data: {
+        raw: txHex,
+        allowhighfees: false,
+        swifttx: false,
+      },
+    }).then(res => {
+      resolve(res);
+    }).catch(err => {
+      reject(err);
+    });
+  });
 };
