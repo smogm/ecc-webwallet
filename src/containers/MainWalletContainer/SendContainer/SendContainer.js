@@ -94,6 +94,9 @@ class SendContainer extends PureComponent {
     .then(res => {
       if (res.status === 200) {
         this.setState({ txStatus: 'success', txHash: res.data.data });
+        setInterval(() => {
+          this.getBalance();
+        }, 1000 * 20);
         setTimeout(() => {
           this.setState({ txStatus: 'pending', txHash: '' });
         }, 1000 * 20);
@@ -102,7 +105,6 @@ class SendContainer extends PureComponent {
       }
     })
     .catch(err => {
-      console.log('error', err);
       this.setState({ txStatus: 'fail', errMsg: err.message ? err.message : '' });
     });
   }
