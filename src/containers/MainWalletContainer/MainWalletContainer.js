@@ -1,5 +1,10 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+import { bindActionCreators } from 'redux';
+import { connectWallet, walletActionCreators } from 'core';
 import { Row, Col, Button, Layout } from 'antd';
+import { promisify } from '../../utilities';
 import ReceiveContainer from './ReceiveContainer/ReceiveContainer';
 import SendContainer from './SendContainer/SendContainer';
 
@@ -11,6 +16,23 @@ class mainWalletContainer extends PureComponent {
     this.state = {
       containerType: 'receive',
     };
+    this.getBalance();
+  }
+
+  componentDidMount() {
+    setInterval(() => {
+      this.getBalance();
+    }, 1000 * 20);
+  }
+
+  getBalance = () => {
+    const { wallet } = this.props;
+    promisify(this.props.getBalance, {
+      address: wallet.address,
+    })
+      .then(() => {
+      })
+      .catch(e => console.log(e));
   }
 
   showWalletContent = containerType => {
@@ -50,5 +72,30 @@ class mainWalletContainer extends PureComponent {
     );
   }
 }
+mainWalletContainer.propTypes = {
+  wallet: PropTypes.object,
+  getBalance: PropTypes.func,
+};
 
-export default mainWalletContainer;
+mainWalletContainer.defaultProps = {
+  wallet: PropTypes.object,
+  getBalance: PropTypes.func,
+};
+
+const mapStateToProps = ({ wallet }) => ({
+  wallet,
+});
+
+const mapDisptachToProps = dispatch => {
+  const {
+    getBalance,
+  } = walletActionCreators;
+
+  return bindActionCreators({
+    getBalance,
+  }, dispatch);
+};
+
+export default compose(
+  connectWallet(mapStateToProps, mapDisptachToProps),
+)(mainWalletContainer);

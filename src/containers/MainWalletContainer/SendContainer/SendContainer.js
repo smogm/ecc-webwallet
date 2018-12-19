@@ -22,20 +22,6 @@ class SendContainer extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    this.getBalance();
-  }
-
-  getBalance = () => {
-    const { wallet } = this.props;
-    promisify(this.props.getBalance, {
-      address: wallet.address,
-    })
-      .then(() => {
-      })
-      .catch(e => console.log(e));
-  }
-
   onChangeData = (type, evt) => {
     switch (type) {
       case 'addressTo':
@@ -94,9 +80,6 @@ class SendContainer extends PureComponent {
     .then(res => {
       if (res.status === 200) {
         this.setState({ txStatus: 'success', txHash: res.data.data });
-        setInterval(() => {
-          this.getBalance();
-        }, 1000 * 20);
         setTimeout(() => {
           this.setState({ txStatus: 'pending', txHash: '' });
         }, 1000 * 20);
