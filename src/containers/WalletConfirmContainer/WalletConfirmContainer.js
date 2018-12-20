@@ -66,28 +66,26 @@ class WalletConfirmContainer extends PureComponent {
     return (
       <div className="block">
         <Layout>
-          <Layout>
-            <Content className="main">
-              <Row className="logo_area">
-                <Col className="center" sm={{ span: 22, offset: 1 }}>
-                  <img alt="true" src={logo} className="logo" />
+          <Content className="main">
+            <Row className="logo_area">
+              <Col className="center" sm={{ span: 22, offset: 1 }}>
+                <img alt="true" src={logo} className="logo" />
+              </Col>
+            </Row>
+            <Row className="wallet_confirm_area">
+              <form onSubmit={this.showWalletPage}>
+                <Col className="wallet_confirm_label center" sm={{ span: 14, offset: 5 }} xs={{ span: 18, offset: 3 }}>
+                  <span>Add a password to save your wallet</span>
                 </Col>
-              </Row>
-              <Row className="wallet_confirm_area">
-                <form onSubmit={this.showWalletPage}>
-                  <Col className="wallet_confirm_label center" sm={{ span: 14, offset: 5 }} xs={{ span: 18, offset: 3 }}>
-                    <span>Add a password to save your wallet</span>
-                  </Col>
-                  <Col className="wallet_password center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
-                    <Input addonAfter={<Icon type="setting" />} onChange={evt => this.onChangeData('password', evt)} addonBefore={<Icon type="setting" />} type="password" />
-                  </Col>
-                  <Col className="center" sm={{ span: 4, offset: 10 }} xs={{ span: 6, offset:8 }}>
-                    <Button onClick={this.showWalletPage} type="submit">Save</Button>
-                  </Col>
-                </form>
-              </Row>
-            </Content>
-          </Layout>
+                <Col className="wallet_password center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
+                  <Input addonAfter={<Icon type="setting" />} onChange={evt => this.onChangeData('password', evt)} addonBefore={<Icon type="setting" />} type="password" />
+                </Col>
+                <Col className="center" sm={{ span: 4, offset: 10 }} xs={{ span: 6, offset:8 }}>
+                  <Button onClick={this.showWalletPage} type="submit">Save</Button>
+                </Col>
+              </form>
+            </Row>
+          </Content>
         </Layout>
       </div>
     );

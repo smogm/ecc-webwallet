@@ -43,30 +43,28 @@ class mainWalletContainer extends PureComponent {
     return (
       <div className="block">
         <Layout>
-          <Layout>
-            <Content className="main">
-              <div className="main_wallet_area">
-                <Row className="main_wallet_label">
-                  <Col className="center">
-                    <span>Receive your funds</span>
-                  </Col>
-                </Row>
-                <Row className="main_wallet_btn">
-                  <Col className="receive_btn" sm={{ span: 12 }} xs={{ span: 12 }}>
-                    <Button className={this.state.containerType === 'receive' ? 'selected' : null} icon="qrcode" onClick={() => this.showWalletContent('receive')}>Receive</Button>
-                  </Col>
-                  <Col className="send_btn" sm={{ span: 12 }} xs={{ span: 12 }}>
-                    <Button className={this.state.containerType === 'send' ? 'selected' : null} onClick={() => this.showWalletContent('send')}>Send</Button>
-                  </Col>
-                </Row>
-                <Row className="main_wallet_container">
-                  {
-                    this.state.containerType === 'receive' ? (<ReceiveContainer />) : (<SendContainer />)
-                  }
-                </Row>
-              </div>
-            </Content>
-          </Layout>
+          <Content className="main">
+            <div className="main_wallet_area">
+              <Row className="main_wallet_label">
+                <Col className="center">
+                  <span>Receive your funds</span>
+                </Col>
+              </Row>
+              <Row className="main_wallet_btn">
+                <Col className="receive_btn" sm={{ span: 12 }} xs={{ span: 12 }}>
+                  <Button className={this.state.containerType === 'receive' ? 'selected' : null} icon="qrcode" onClick={() => this.showWalletContent('receive')}>Receive</Button>
+                </Col>
+                <Col className="send_btn" sm={{ span: 12 }} xs={{ span: 12 }}>
+                  <Button className={this.state.containerType === 'send' ? 'selected' : null} onClick={() => this.showWalletContent('send')}>Send</Button>
+                </Col>
+              </Row>
+              <Row className="main_wallet_container">
+                {
+                  this.state.containerType === 'receive' ? (<ReceiveContainer />) : (<SendContainer />)
+                }
+              </Row>
+            </div>
+          </Content>
         </Layout>
       </div>
     );

@@ -18,26 +18,24 @@ class LoginContainer extends PureComponent {
     return (
       <div className="block">
         <Layout>
-          <Layout>
-            <Content className="main">
-              <Row className="logo_area">
-                <Col className="center" sm={{ span: 22, offset: 1 }}>
-                  <img alt="true" src={logo} className="logo" />
-                </Col>
-              </Row>
-              <Row className="wallet_btn_area">
-                <Col className="wallet_label center" sm={{ span: 12, offset: 6 }}>
-                  <span>Create or unlock a wallet</span>
-                </Col>
-                <Col className="center" sm={{ span: 14, offset: 5 }} xs={{ span: 20, offset:2 }}>
-                  <Button onClick={this.showWalletConfirm}>Create a new wallet</Button>
-                </Col>
-                <Col className="center" sm={{ span: 14, offset: 5 }} xs={{ span: 20, offset:2 }}>
-                  <Button onClick={this.showWalletUnlock}>Unlock existing wallet</Button>
-                </Col>
-              </Row>
-            </Content>
-          </Layout>
+          <Content className="main">
+            <Row className="logo_area">
+              <Col className="center" sm={{ span: 22, offset: 1 }}>
+                <img alt="true" src={logo} className="logo" />
+              </Col>
+            </Row>
+            <Row className="wallet_btn_area">
+              <Col className="wallet_label center" sm={{ span: 12, offset: 6 }}>
+                <span>Create or unlock a wallet</span>
+              </Col>
+              <Col className="center" sm={{ span: 14, offset: 5 }} xs={{ span: 20, offset:2 }}>
+                <Button onClick={this.showWalletConfirm}>Create a new wallet</Button>
+              </Col>
+              <Col className="center" sm={{ span: 14, offset: 5 }} xs={{ span: 20, offset:2 }}>
+                <Button onClick={this.showWalletUnlock}>Unlock existing wallet</Button>
+              </Col>
+            </Row>
+          </Content>
         </Layout>
       </div>
     );
