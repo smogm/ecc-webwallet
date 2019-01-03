@@ -75,7 +75,7 @@ class WalletConfirmContainer extends PureComponent {
             <Row className="wallet_confirm_area">
               <form onSubmit={this.showWalletPage}>
                 <Col className="wallet_confirm_label center" sm={{ span: 14, offset: 5 }} xs={{ span: 18, offset: 3 }}>
-                  <span>Add a password to save your wallet</span>
+                  <span>Enter a password below to create your wallet</span>
                 </Col>
                 <Col className="wallet_password center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
                   <Input onChange={evt => this.onChangeData('password', evt)} type="password" />

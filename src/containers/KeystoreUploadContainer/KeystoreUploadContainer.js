@@ -99,7 +99,7 @@ class KeystoreUploadContainer extends PureComponent {
             <Row className="wallet_unlock_area">
               <form onSubmit={e => this.unlockWallet(e)}>
                 <Col className="wallet_keystore_label center" sm={{ span: 16, offset: 4 }} xs={{ span: 18, offset: 3 }}>
-                  <span>Enter a keystore password to get started</span>
+                  <span>Select a keystore file and enter password</span>
                 </Col>
                 <Col className="keystore_btn center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
                   <input type="file" ref={input => { this.inputElement = input; }} onChange={this.fileChangedHandler} />
