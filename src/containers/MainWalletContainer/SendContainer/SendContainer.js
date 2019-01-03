@@ -111,10 +111,10 @@ class SendContainer extends PureComponent {
                   </span>
                 </Col>
                 <Col className="send_to" sm={{ span: 18, offset: 3 }}>
-                  <Input addonBefore={<span>To:</span>} onChange={evt => this.onChangeData('addressTo', evt)} addonAfter={<Icon type="setting" />} type="text" />
+                  <Input addonBefore={<span>To:</span>} onChange={evt => this.onChangeData('addressTo', evt)} type="text" />
                 </Col>
                 <Col className="send_amount" sm={{ span: 18, offset: 3 }}>
-                  <Input addonBefore={<span>Amount:</span>} onChange={evt => this.onChangeData('amount', evt)} addonAfter={<Icon type="setting" />} type="number" />
+                  <Input addonBefore={<span>Amount:</span>} onChange={evt => this.onChangeData('amount', evt)} type="number" />
                 </Col>
                 {
                   this.state.errMsg !== '' ? (
