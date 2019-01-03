@@ -19,10 +19,18 @@ class mainWalletContainer extends PureComponent {
     this.getBalance();
   }
 
-  componentDidMount() {
-    setInterval(() => {
-      this.getBalance();
-    }, 1000 * 20);
+  componentWillMount() {
+    this.mounted = true;
+    if (this.mounted) {
+      this.balanceRef = setInterval(() => {
+        this.getBalance();
+      }, 1000 * 20);
+    }
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+    clearInterval(this.balanceRef);
   }
 
   getBalance = () => {
