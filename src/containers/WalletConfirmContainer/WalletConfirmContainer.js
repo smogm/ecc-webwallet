@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
-import { Row, Col, Icon, Button, Input, Layout } from 'antd';
+import { Row, Col, Button, Input, Layout } from 'antd';
 import { connectWallet, walletActionCreators } from 'core';
 import logo from 'assets/img/logo.png';
 import { promisify } from '../../utilities';
@@ -78,7 +78,7 @@ class WalletConfirmContainer extends PureComponent {
                   <span>Add a password to save your wallet</span>
                 </Col>
                 <Col className="wallet_password center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
-                  <Input addonAfter={<Icon type="setting" />} onChange={evt => this.onChangeData('password', evt)} addonBefore={<Icon type="setting" />} type="password" />
+                  <Input onChange={evt => this.onChangeData('password', evt)} type="password" />
                 </Col>
                 <Col className="center" sm={{ span: 4, offset: 10 }} xs={{ span: 6, offset:8 }}>
                   <Button onClick={this.showWalletPage} type="submit">Save</Button>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connectWallet, walletActionCreators } from 'core';
-import { Row, Col, Icon, Button, Input, Layout } from 'antd';
+import { Row, Col, Button, Input, Layout } from 'antd';
 import logo from 'assets/img/logo.png';
 import { promisify } from '../../utilities';
 import { importAddressFromPrivateKey } from '../../services/lib/bitcoingreen-lib';
@@ -106,7 +106,7 @@ class KeystoreUploadContainer extends PureComponent {
                   <Button type="button" onClick={this.chooseFile}>{ this.state.selectedFile ? this.state.selectedFile.name : 'Keystore file' }</Button>
                 </Col>
                 <Col className="wallet_password center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
-                  <Input disabled={this.state.fileData === ''} onChange={evt => this.onChangeData('password', evt)} addonAfter={<Icon type="setting" />} addonBefore={<Icon type="setting" />} type="password" />
+                  <Input disabled={this.state.fileData === ''} onChange={evt => this.onChangeData('password', evt)} type="password" />
                 </Col>
                 {
                   !this.state.isValidPwd ? (
