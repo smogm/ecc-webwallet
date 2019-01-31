@@ -1,1 +1,1 @@
-export const apiEndpoint = 'http://3.83.47.79:8080/api/v1';
+export const apiEndpoint = 'https://bitg.mousebelt.com/api/v1'; // Leave it as a temporary URL for test, BITG is not affiliated with MB.
