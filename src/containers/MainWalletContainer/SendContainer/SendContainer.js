@@ -80,9 +80,6 @@ class SendContainer extends PureComponent {
     .then(res => {
       if (res.status === 200) {
         this.setState({ txStatus: 'success', txHash: res.data.data });
-        setTimeout(() => {
-          this.setState({ txStatus: 'pending', txHash: '' });
-        }, 1000 * 20);
       } else {
         this.setState({ txStatus: 'fail', errMsg: res.data.message });
       }
@@ -127,10 +124,7 @@ class SendContainer extends PureComponent {
                   this.state.txStatus === 'success' ? (
                     <Col className="tx_send_success success_msg" sm={{ span: 18, offset: 3 }}>
                       <p>
-                        Tx Hash:
-                      </p>
-                      <p>
-                        {this.state.txHash}
+                        <a href={config.COIN_EXPORER_URL + this.state.txHash}>{ config.COIN_EXPORER_URL + this.state.txHash }</a>
                       </p>
                     </Col>
                   ) : null
