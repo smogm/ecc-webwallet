@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connectWallet, walletActionCreators } from 'core';
 import { Row, Col, Input, Icon, Button, Layout } from 'antd';
-import { setTransaction, submitTransaction } from '../../../services/lib/bitcoingreen-lib';
+import { setTransaction, submitTransaction } from '../../../services/lib/eccoin-lib';
 import { promisify } from '../../../utilities';
 import { config } from '../../../config';
 
@@ -104,7 +104,7 @@ class SendContainer extends PureComponent {
                 <Col className="send_balance_label center">
                   <span>
                     { wallet.balance ? wallet.balance : 0 }
-                    BITG
+                    ECC
                   </span>
                 </Col>
                 <Col className="send_to" sm={{ span: 18, offset: 3 }}>

@@ -6,7 +6,7 @@ import { Row, Col, Button, Input, Layout } from 'antd';
 import { connectWallet, walletActionCreators } from 'core';
 import logo from 'assets/img/logo.png';
 import { promisify } from '../../utilities';
-import { generateAddress } from '../../services/lib/bitcoingreen-lib';
+import { generateAddress } from '../../services/lib/eccoin-lib';
 import { exportKeyStore } from '../../services/lib/keystore-lib';
 
 const { Content } = Layout;

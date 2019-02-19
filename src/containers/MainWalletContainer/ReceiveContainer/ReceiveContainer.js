@@ -24,7 +24,7 @@ class ReceiveContainer extends PureComponent {
               <Col className="receive_balance_label center">
                 <span>
                   { wallet.balance ? wallet.balance : 0 }
-                  BITG
+                  ECC
                 </span>
               </Col>
               <Col className="receive_qrcode center">

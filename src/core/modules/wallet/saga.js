@@ -29,13 +29,13 @@ export function* asyncWalletBalanceRequest({ payload, resolve, reject }) {
   try {
     const response = yield call(ApiService,
       {
-        api: `https://www.coinexplorer.net/api/v1/BITG/address/balance?address=${address}`,
+        api: `https://chainz.cryptoid.info/ecc/api.dws?q=getbalance&a=${address}`,
         thirdParty: true,
         method: 'GET',
         params: {},
       });
     if (response.success) {
-      yield put(walletActionCreators.getBalanceSuccess({ balance: response.result[address] }));
+      yield put(walletActionCreators.getBalanceSuccess({ balance: response }));
       resolve(response.result);
     } else {
       yield put(walletActionCreators.getBalanceFailure({ balance: 0 }));

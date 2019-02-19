@@ -2,7 +2,7 @@ import axios from 'axios';
 import { config } from '../../config';
 import { apiEndpoint } from '../constants';
 
-const bitcoin = require('bitcoingreenjs-lib-test'); // ToDo: This package is test lib. It should be updated with released bitcoingreenjs-lib
+const bitcoin = require('eccoinjs-lib');
 
 function randomStr() {
   let text = '';
