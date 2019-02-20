@@ -1,0 +1,324 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: #ffffff;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: 'Space Mono', monospace;
+  margin: 0px;
+}
+.App {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.App .logo {
+  width: 125px;
+}
+.App .content {
+  display: table-cell;
+  vertical-align: middle;
+  margin: auto;
+  width: 550px;
+  height: 600px;
+  padding: 0px 20px;
+  margin-bottom: 72px;
+}
+.App .content .ant-layout {
+  background-color: #ffffff;
+}
+.App .content .ant-layout-header {
+  background-color: #ffffff;
+}
+.App .content .center {
+  text-align: center;
+}
+.App .content .invalid_msg {
+  color: #f22020;
+}
+.App .content .success_msg {
+  color: #137715;
+}
+.App .content .selected {
+  background-color: #17273d !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+.block {
+  width: 550px;
+  height: 600px;
+  margin: 0 auto;
+}
+@media all and (max-width: 500px) {
+  .block {
+    width: auto !important;
+  }
+  .block .wallet_label {
+    display: none !important;
+  }
+}
+.block .wallet_btn_area {
+  margin-top: 30px;
+}
+.block .wallet_btn_area .wallet_label {
+  margin-bottom: 20px;
+}
+.block .wallet_btn_area .wallet_label span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+.block .wallet_btn_area button {
+  width: 100%;
+  height: 50px;
+  border-radius: 30px;
+  margin-top: 15px;
+  background-color: #17273d;
+  border-color: #cd8527;
+}
+.block .wallet_btn_area button span {
+  font-size: 18px;
+  color: #ffffff;
+}
+.block {
+  width: 550px;
+  height: 600px;
+  margin: 0 auto;
+}
+@media all and (max-width: 500px) {
+  .block {
+    width: auto !important;
+  }
+}
+.block .wallet_confirm_area {
+  margin-top: 30px;
+}
+.block .wallet_confirm_area .wallet_confirm_label {
+  margin-bottom: 15px;
+}
+.block .wallet_confirm_area .wallet_confirm_label span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+.block .wallet_confirm_area .wallet_password input {
+  height: 40px;
+  background-color: #fafafa;
+}
+.block .wallet_confirm_area button {
+  width: 100%;
+  height: 50px;
+  border-radius: 30px;
+  margin-top: 15px;
+  background-color: #17273d;
+  border-color: #cd8527;
+}
+.block .wallet_confirm_area button span {
+  font-size: 18px;
+  color: #ffffff;
+}
+.block {
+  width: 550px;
+  height: 600px;
+  margin: 0 auto;
+}
+@media all and (max-width: 500px) {
+  .block {
+    width: auto !important;
+  }
+}
+.block .wallet_unlock_area {
+  margin-top: 30px;
+}
+.block .wallet_unlock_area .wallet_keystore_label {
+  margin-bottom: 20px;
+}
+.block .wallet_unlock_area .wallet_keystore_label span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+.block .wallet_unlock_area .wallet_password {
+  margin-bottom: 5px;
+}
+.block .wallet_unlock_area .wallet_password input {
+  height: 40px;
+  background-color: #fafafa;
+}
+.block .wallet_unlock_area .keystore_btn {
+  margin-bottom: 30px;
+}
+.block .wallet_unlock_area .keystore_btn input {
+  display: none;
+}
+.block .wallet_unlock_area .keystore_btn button {
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #fafafa;
+}
+.block .wallet_unlock_area .unlock_btn button {
+  width: 100%;
+  height: 50px;
+  border-radius: 30px;
+  margin-top: 15px;
+  background-color: #17273d;
+  border-color: #cd8527;
+}
+.block .wallet_unlock_area .unlock_btn button span {
+  font-size: 18px;
+  color: #ffffff;
+}
+.block {
+  width: 550px;
+  height: 600px;
+  margin: 0 auto;
+}
+@media all and (max-width: 500px) {
+  .block {
+    width: auto !important;
+  }
+}
+.block .main_wallet_area .main_wallet_label span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+.block .main_wallet_area .main_wallet_btn {
+  margin-top: 30px;
+}
+.block .main_wallet_area .main_wallet_btn button {
+  width: 140px;
+  height: 50px;
+  border-radius: 30px;
+  background-color: #fafafa;
+  font-weight: bold;
+  font-size: 18px;
+}
+.block .main_wallet_area .main_wallet_btn .receive_btn {
+  text-align: right;
+  padding-right: 2px;
+}
+.block .main_wallet_area .main_wallet_btn .send_btn {
+  padding-left: 2px;
+}
+.block {
+  width: 550px;
+  height: 600px;
+  margin: 0 auto;
+}
+@media all and (max-width: 500px) {
+  .block {
+    width: auto !important;
+  }
+}
+.block .receive_area .receive_label {
+  font-size: 18px;
+  color: gray;
+  margin-top: 30px;
+}
+.block .receive_area .receive_balance_label {
+  font-size: 18px;
+  color: #333;
+  margin-top: 5px;
+}
+.block .receive_area .receive_qrcode {
+  margin-top: 20px;
+}
+.block .receive_area .receive_address_area {
+  height: 50px;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  padding: 0 5px;
+  margin-top: 30px;
+}
+.block .receive_area .receive_address_area .clipboard_cpy_area {
+  line-height: 50px;
+}
+.block .receive_area .receive_address_area .clipboard_cpy_area .receive_address {
+  padding: 0 2px;
+}
+.block .receive_area .receive_address_area input {
+  border: none;
+  color: #333;
+  font-weight: bold;
+}
+.block .receive_area .receive_address_area .address_copy_btn {
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  border-radius: 3px;
+  background-color: #17273d;
+  border-color: #cd8527;
+  color: #ffffff;
+}
+.block {
+  width: 550px;
+  height: 600px;
+  margin: 0 auto;
+}
+@media all and (max-width: 500px) {
+  .block {
+    width: auto !important;
+  }
+}
+.block .send_area .send_label {
+  font-size: 18px;
+  color: gray;
+  margin-top: 30px;
+}
+.block .send_area .send_balance_label {
+  font-size: 18px;
+  color: #333;
+  margin-top: 5px;
+}
+.block .send_area .ant-input-group-addon {
+  background: #ffffff !important;
+  color: gray !important;
+}
+.block .send_area input {
+  height: 50px;
+  border-left: none;
+  color: #333;
+}
+.block .send_area .send_to,
+.block .send_area .send_amount {
+  margin-top: 20px;
+}
+.block .send_area .tx_send_success p {
+  overflow-wrap: break-word;
+}
+.block .send_area .send_fee_area {
+  margin-top: 10px;
+  padding: 0 15px;
+}
+.block .send_area .send_fee_area .send_fee {
+  color: gray;
+}
+.block .send_area .send_fee_area .send_fee_amout {
+  text-align: right;
+}
+.block .send_area .send_fee_area .send_fee_amout span {
+  color: #137715;
+}
+.block .send_area .submit_transaction {
+  margin-top: 30px;
+}
+.block .send_area .submit_transaction button {
+  width: 200px;
+  height: 50px;
+  border-radius: 30px;
+  border: none;
+  background-color: #137715;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 18px;
+}

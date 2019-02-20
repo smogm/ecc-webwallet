@@ -9,7 +9,8 @@ import LoginContainer from 'containers/LoginContainer/LoginContainer';
 import WalletConfirmContainer from 'containers/WalletConfirmContainer/WalletConfirmContainer';
 import KeystoreUploadContainer from 'containers/KeystoreUploadContainer/KeystoreUploadContainer';
 
-import 'css/App.less';
+//import 'css/App.less';
+//import 'css/index.css';
 
 class App extends Component {
   render() {

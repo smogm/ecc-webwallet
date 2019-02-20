@@ -6,7 +6,8 @@ import registerServiceWorker from './registerServiceWorker';
 
 import 'font-awesome/css/font-awesome.min.css';
 import 'antd/dist/antd.css';
-import 'css/index.less';
+//import 'css/index.less';
+import 'css/style.css';
 
 ReactDOM.render(
   <BrowserRouter>
