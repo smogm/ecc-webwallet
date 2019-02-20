@@ -25,6 +25,10 @@ class LoginContainer extends PureComponent {
               </Col>
             </Row>
             <Row className="wallet_btn_area">
+              <Col className="center" sm={{ span: 14, offset: 5 }} xs={{ span: 20, offset:2 }}>
+                <h1>ECCoin Web Wallet</h1>
+                <small>Create your own ECC wallet with your own private key!</small>
+              </Col>
               <Col className="wallet_label center" sm={{ span: 12, offset: 6 }}>
                 <span>Create or unlock a wallet</span>
               </Col>
@@ -33,6 +37,11 @@ class LoginContainer extends PureComponent {
               </Col>
               <Col className="center" sm={{ span: 14, offset: 5 }} xs={{ span: 20, offset:2 }}>
                 <Button onClick={this.showWalletUnlock}>Unlock existing wallet</Button>
+              </Col>
+              <Col className="center" sm={{ span: 14, offset: 5 }} xs={{ span: 20, offset:2 }}>
+                <small>The private key is <strong>not</strong> leaving your computer!<br />
+                The key is generated inside the browser.<br />
+                Keep the password and the generated keyStore.json file safe!</small>
               </Col>
             </Row>
           </Content>

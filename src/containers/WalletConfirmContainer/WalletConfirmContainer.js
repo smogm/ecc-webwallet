@@ -78,7 +78,7 @@ class WalletConfirmContainer extends PureComponent {
                   <span>Enter a password below to create your wallet</span>
                 </Col>
                 <Col className="wallet_password center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
-                  <Input onChange={evt => this.onChangeData('password', evt)} type="password" />
+                  <Input onChange={evt => this.onChangeData('password', evt)} type="password" placeholder="Password"/>
                 </Col>
                 <Col className="center" sm={{ span: 4, offset: 10 }} xs={{ span: 6, offset:8 }}>
                   <Button onClick={this.showWalletPage} type="submit">Save</Button>

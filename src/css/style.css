@@ -49,8 +49,8 @@ p {
 }
 .App .content .selected {
   background-color: #17273d !important;
+  border-color: #cd8527 !important;
   color: #ffffff !important;
-  border: none !important;
 }
 .block {
   width: 550px;
@@ -307,7 +307,7 @@ p {
   text-align: right;
 }
 .block .send_area .send_fee_area .send_fee_amout span {
-  color: #137715;
+  color: #cd8527;
 }
 .block .send_area .submit_transaction {
   margin-top: 30px;
@@ -317,7 +317,8 @@ p {
   height: 50px;
   border-radius: 30px;
   border: none;
-  background-color: #137715;
+  background-color: #17273d;
+  border-color: #cd8527;
   color: #ffffff;
   font-weight: bold;
   font-size: 18px;

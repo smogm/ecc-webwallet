@@ -102,11 +102,11 @@ class KeystoreUploadContainer extends PureComponent {
                   <span>Select a keystore file and enter password</span>
                 </Col>
                 <Col className="keystore_btn center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
-                  <input type="file" ref={input => { this.inputElement = input; }} onChange={this.fileChangedHandler} />
+                  <input type="file" ref={input => { this.inputElement = input; }} onChange={this.fileChangedHandler} accept=".json,application/json" />
                   <Button type="button" onClick={this.chooseFile}>{ this.state.selectedFile ? this.state.selectedFile.name : 'Keystore file' }</Button>
                 </Col>
                 <Col className="wallet_password center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
-                  <Input disabled={this.state.fileData === ''} onChange={evt => this.onChangeData('password', evt)} type="password" />
+                  <Input disabled={this.state.fileData === ''} onChange={evt => this.onChangeData('password', evt)} type="password" placeholder="Password"/>
                 </Col>
                 {
                   !this.state.isValidPwd ? (

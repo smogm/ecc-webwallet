@@ -103,8 +103,7 @@ class SendContainer extends PureComponent {
                 </Col>
                 <Col className="send_balance_label center">
                   <span>
-                    { wallet.balance ? wallet.balance : 0 }
-                    ECC
+                    { wallet.balance ? wallet.balance : 0 }&nbsp;ECC
                   </span>
                 </Col>
                 <Col className="send_to" sm={{ span: 18, offset: 3 }}>
