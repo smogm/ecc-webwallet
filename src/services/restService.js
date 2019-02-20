@@ -7,10 +7,10 @@ export async function ApiService({ api, encapsulate, method, params, expectJson 
 
   let path = api;
 
-  //set(headers, 'Accept', 'application/json');
+  set(headers, 'Accept', 'application/json');
 
   const reqBody = {
-	mode: 'no-cors',
+	//mode: 'no-cors',
     method,
     headers,
   };
