@@ -1,20 +1,16 @@
 // @flow
 
 import { set, isEmpty } from 'lodash';
-import { apiEndpoint } from './constants';
 
-export async function ApiService({ api, thirdParty, method, params }) {
+export async function ApiService({ api, encapsulate, method, params, expectJson }) {
   const headers = {};
 
-  let path = `${apiEndpoint}${api}`;
+  let path = api;
 
-  if (thirdParty) {
-    path = api;
-  }
-  set(headers, 'Accept', 'application/json');
-  // set(headers, 'Content-Type', 'application/json');
-  // set(headers, 'Access-Control-Expose-Headers', 'authorization');
+  //set(headers, 'Accept', 'application/json');
+
   const reqBody = {
+	mode: 'no-cors',
     method,
     headers,
   };
@@ -25,10 +21,21 @@ export async function ApiService({ api, thirdParty, method, params }) {
 
   return fetch(path, reqBody)
     .then(response => {
-      return response.json();
+		if (expectJson) {
+			return response.json()
+		}
+		return response.text();
     })
     .then(data => {
-      return data;
+		if (encapsulate) {
+			return {
+				success: true,
+				result: data,
+				error: ""
+			};
+		}
+
+		return data;
     })
     .catch(() => {
       return {

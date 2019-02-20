@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { config } from '../../config';
-import { apiEndpoint } from '../constants';
 
 const bitcoin = require('eccoinjs-lib');
 
@@ -31,7 +30,7 @@ export const setTransaction = (txUtxos, txUtxoValue, amount, receiveAddress, sen
   const rawTransaction = new bitcoin.TransactionBuilder();
   const keyPair = bitcoin.ECPair.fromPrivateKey(privateKey);
   for (let i = 0; i < txUtxos.length; i += 1) {
-    rawTransaction.addInput(txUtxos[i].txid, txUtxos[i].vout);
+    rawTransaction.addInput(txUtxos[i].tx_hash, txUtxos[i].tx_ouput_n);
   }
   const change = txUtxoValue - amount - config.FEE_AMOUNT;
   rawTransaction.addOutput(receiveAddress, parseInt(+amount * (10 ** 8), 10));
@@ -44,7 +43,8 @@ export const setTransaction = (txUtxos, txUtxoValue, amount, receiveAddress, sen
 
 export const submitTransaction = rawTransaction => {
   const txHex = rawTransaction.build().toHex();
-  const url = `${apiEndpoint}/rpc/sendrawtransaction`;
+  const url = `${config.BACKEND_API_ENDPOINT}/rpc/sendrawtransaction`;
+  console.log(url);
   return new Promise((resolve, reject) => {
     axios({
       method: 'post',
@@ -52,11 +52,12 @@ export const submitTransaction = rawTransaction => {
       data: {
         raw: txHex,
         allowhighfees: false,
-        swifttx: false,
       },
     }).then(res => {
+		console.log("inside then");
       resolve(res);
     }).catch(err => {
+		console.log("inside catch");
       reject(err);
     });
   });

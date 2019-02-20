@@ -106,7 +106,7 @@ class KeystoreUploadContainer extends PureComponent {
                   <Button type="button" onClick={this.chooseFile}>{ this.state.selectedFile ? this.state.selectedFile.name : 'Keystore file' }</Button>
                 </Col>
                 <Col className="wallet_password center" sm={{ span: 22, offset: 1 }} xs={{ span: 20, offset:2 }}>
-                  <Input disabled={this.state.fileData === ''} onChange={evt => this.onChangeData('password', evt)} type="password" placeholder="Password"/>
+                  <Input disabled={this.state.fileData === ''} onChange={evt => this.onChangeData('password', evt)} type="password" placeholder="Password" autoComplete="new-password" />
                 </Col>
                 {
                   !this.state.isValidPwd ? (

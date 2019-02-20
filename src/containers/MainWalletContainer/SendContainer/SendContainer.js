@@ -60,8 +60,9 @@ class SendContainer extends PureComponent {
 
           for (let i = 0; i < wallet.utxos.length; i += 1) {
             txUtxos.push(wallet.utxos[i]);
-            txUtxoValue += +wallet.utxos[i].value;
+            txUtxoValue += +(wallet.utxos[i].value / 10**8); // chainid returns non-float values!
             if (txUtxoValue > this.state.txValue) {
+			  console.log("going to processTransaction");
               this.processTransaction(txUtxos, txUtxoValue, this.state.txValue);
               break;
             }
@@ -75,9 +76,10 @@ class SendContainer extends PureComponent {
 
   processTransaction = (txUtxos, txUtxoValue, amount) => {
     const { wallet } = this.props;
+    console.log("processTransaction");
     const rawTransaction = setTransaction(txUtxos, txUtxoValue, amount, this.state.addressTo, wallet.address, wallet.privateKey);
-    submitTransaction(rawTransaction)
-    .then(res => {
+    console.log("back from setTransaction");
+    submitTransaction(rawTransaction).then(res => {
       if (res.status === 200) {
         this.setState({ txStatus: 'success', txHash: res.data.data });
       } else {
@@ -123,7 +125,7 @@ class SendContainer extends PureComponent {
                   this.state.txStatus === 'success' ? (
                     <Col className="tx_send_success success_msg" sm={{ span: 18, offset: 3 }}>
                       <p>
-                        <a href={config.COIN_EXPORER_URL + this.state.txHash}>{ config.COIN_EXPORER_URL + this.state.txHash }</a>
+                        <a href={config.EXPORER_TX_URL + this.state.txHash + '.htm'}>{ config.EXPORER_TX_URL + this.state.txHash + '.htm' }</a>
                       </p>
                     </Col>
                   ) : null

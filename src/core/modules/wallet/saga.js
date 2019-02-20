@@ -13,6 +13,11 @@ import {
   UTXOS_REQUEST,
 } from './actions';
 
+import {
+	getExplorerApiBalanceUrl,
+	getExplorerApiUtxoUrl
+} from '../../../config';
+
 import { ApiService } from '../../../services';
 
 export function* asyncCreateWalletRequest({ payload, resolve, reject }) {
@@ -29,13 +34,12 @@ export function* asyncWalletBalanceRequest({ payload, resolve, reject }) {
   try {
     const response = yield call(ApiService,
       {
-        api: `https://chainz.cryptoid.info/ecc/api.dws?q=getbalance&a=${address}`,
-        thirdParty: true,
+        api: getExplorerApiBalanceUrl(address),
+        encapsulate: true,
         method: 'GET',
         params: {},
       });
     if (response.success) {
-      console.log(response);
       yield put(walletActionCreators.getBalanceSuccess({ balance: response.result }));
       resolve(response.result);
     } else {
@@ -52,13 +56,14 @@ export function* asyncWalletUtxoRequest({ payload, resolve, reject }) {
   try {
     const response = yield call(ApiService,
       {
-        api: `https://www.coinexplorer.net/api/v1/BITG/address/unspent?address=${address}`,
-        thirdParty: true,
+        api: getExplorerApiUtxoUrl(address),
+        encapsulate: true,
         method: 'GET',
         params: {},
+        expectJson: true
       });
     if (response.success) {
-      yield put(walletActionCreators.getUtxosSuccess({ utxos: response.result }));
+      yield put(walletActionCreators.getUtxosSuccess({ utxos: response.result.unspent_outputs }));
       resolve(response.result);
     } else {
       yield put(walletActionCreators.getUtxosFailure({ utxos: [] }));
