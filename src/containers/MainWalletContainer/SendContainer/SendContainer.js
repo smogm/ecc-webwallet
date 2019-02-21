@@ -62,7 +62,6 @@ class SendContainer extends PureComponent {
             txUtxos.push(wallet.utxos[i]);
             txUtxoValue += +(wallet.utxos[i].value / 10**8); // chainid returns non-float values!
             if (txUtxoValue > this.state.txValue) {
-			  console.log("going to processTransaction");
               this.processTransaction(txUtxos, txUtxoValue, this.state.txValue);
               break;
             }
