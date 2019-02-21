@@ -24,7 +24,7 @@ class mainWalletContainer extends PureComponent {
     if (this.mounted) {
       this.balanceRef = setInterval(() => {
         this.getBalance();
-      }, 1000 * 20);
+      }, 1000 * 60);
     }
   }
 
