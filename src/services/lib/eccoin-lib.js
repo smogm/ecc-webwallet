@@ -44,15 +44,17 @@ export const setTransaction = (txUtxos, txUtxoValue, amount, receiveAddress, sen
 export const submitTransaction = rawTransaction => {
   const txHex = rawTransaction.build().toHex();
   const url = `${config.BACKEND_API_ENDPOINT}/rpc/sendrawtransaction`;
-  console.log(url);
+
+  const sendData = {
+	raw: txHex,
+	allowhighfees: false,
+  };
+
   return new Promise((resolve, reject) => {
     axios({
       method: 'post',
       url,
-      data: {
-        raw: txHex,
-        allowhighfees: false,
-      },
+      data: sendData,
     }).then(res => {
 		console.log("inside then");
       resolve(res);
