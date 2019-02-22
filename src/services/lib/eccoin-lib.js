@@ -27,16 +27,39 @@ export const importAddressFromPrivateKey = privateKey => {
 };
 
 export const setTransaction = (txUtxos, txUtxoValue, amount, receiveAddress, senderAddress, privateKey) => {
+  console.log("setTransaction")
+  console.log("receiveAddress: " + receiveAddress)
+  console.log("senderAddress: " + senderAddress)
+  
   const rawTransaction = new bitcoin.TransactionBuilder();
   const keyPair = bitcoin.ECPair.fromPrivateKey(privateKey);
   for (let i = 0; i < txUtxos.length; i += 1) {
     rawTransaction.addInput(txUtxos[i].tx_hash, txUtxos[i].tx_ouput_n);
   }
-  const change = txUtxoValue - amount - config.FEE_AMOUNT;
-  rawTransaction.addOutput(receiveAddress, parseInt(+amount * (10 ** 8), 10));
-  rawTransaction.addOutput(senderAddress, parseInt(+change * (10 ** 8), 10));
+  
+  // 10^6 according to amount.h: static const CAmount COIN = 1000000;
+  const txUtxoValueSatoshis = parseInt(+txUtxoValue * (10 ** 6), 10)
+  const amountSatoshis = parseInt(+amount * (10 ** 6), 10)
+  const feeSatoshis = parseInt(+config.FEE_AMOUNT * (10 ** 6), 10)
+  
+  const changeSatoshis = txUtxoValueSatoshis - amountSatoshis - feeSatoshis
+  /*const change = txUtxoValue - amount - config.FEE_AMOUNT;
+  
+  console.log("txUtxoValue: " + txUtxoValue)
+  console.log("amount: " + amount)
+  console.log("config.FEE_AMOUNT: " + config.FEE_AMOUNT)
+  console.log("change: " + change)
+  
+  // 10^6 according to amount.h: static const CAmount COIN = 1000000;
+  const amountSatoshis = parseInt(+amount * (10 ** 6), 10)
+  const changeSatoshis = parseInt(+change * (10 ** 6), 10)*/
+  console.log("amountSatoshis: " + amountSatoshis)
+  console.log("changeSatoshis: " + changeSatoshis)
+  
+  rawTransaction.addOutput(receiveAddress, amountSatoshis);
+  rawTransaction.addOutput(senderAddress, changeSatoshis);
   for (let i = 0; i < txUtxos.length; i += 1) {
-    rawTransaction.sign(i, keyPair);
+    rawTransaction.sign(i, keyPair); // sign each input (output from previous tx (utxo)) pubkey script
   }
   return rawTransaction;
 };
@@ -56,10 +79,8 @@ export const submitTransaction = rawTransaction => {
       url,
       data: sendData,
     }).then(res => {
-		console.log("inside then");
       resolve(res);
     }).catch(err => {
-		console.log("inside catch");
       reject(err);
     });
   });
