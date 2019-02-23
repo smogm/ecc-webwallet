@@ -75,9 +75,7 @@ class SendContainer extends PureComponent {
 
   processTransaction = (txUtxos, txUtxoValue, amount) => {
     const { wallet } = this.props;
-    console.log("processTransaction");
     const rawTransaction = setTransaction(txUtxos, txUtxoValue, amount, this.state.addressTo, wallet.address, wallet.privateKey);
-    console.log("back from setTransaction");
     submitTransaction(rawTransaction).then(res => {
       if (res.status === 200) {
         this.setState({ txStatus: 'success', txHash: res.data.data });
