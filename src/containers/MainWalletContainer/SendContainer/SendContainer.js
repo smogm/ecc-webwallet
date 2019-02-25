@@ -121,28 +121,32 @@ class SendContainer extends PureComponent {
                 {
                   this.state.txStatus === 'success' ? (
                     <Col className="tx_send_success success_msg" sm={{ span: 18, offset: 3 }}>
-                      <p>Your transaction was successfully submitted to the ECC network!</p>
-				      <p>It may now take up to 10 - 15 minutes until it is confirmed.</p>
-				      <p>TxID: {this.state.txHash}</p>
+                      <small>Your transaction was successfully submitted to the ECC network!<br />
+                      <strong>It may now take up to 10 - 15 minutes until it is confirmed and visible on the blockchain!</strong><br />
+				      TxID: {this.state.txHash}</small>
                       <p>
-                        <a href={config.EXPORER_TX_URL + this.state.txHash + '.htm'}>Open Block Explorer</a>
+                        <a href={config.EXPORER_TX_URL + this.state.txHash + '.htm'} target="_blank" rel="noopener noreferrer">Open Block Explorer</a>
                       </p>
                     </Col>
                   ) : null
                 }
-                <Col className="send_fee_area" sm={{ span: 18, offset: 3 }}>
-                  <Row>
-                    <Col className="send_fee" sm={{ span: 12 }} xs={{ span: 12 }}>
-                      <span>Fee</span>
-                    </Col>
-                    <Col className="send_fee_amout" sm={{ span: 12 }} xs={{ span: 12 }}>
-                      <span>
-                        <Icon type="caret-up" />
-                        {config.FEE_AMOUNT}
-                      </span>
-                    </Col>
-                  </Row>
-                </Col>
+                {
+                  config.FEE_AMOUNT > 0 ? (
+					<Col className="send_fee_area" sm={{ span: 18, offset: 3 }}>
+					  <Row>
+						<Col className="send_fee" sm={{ span: 12 }} xs={{ span: 12 }}>
+						  <span>Fee</span>
+						</Col>
+						<Col className="send_fee_amout" sm={{ span: 12 }} xs={{ span: 12 }}>
+						  <span>
+							<Icon type="caret-up" />
+							{config.FEE_AMOUNT}
+						  </span>
+						</Col>
+					  </Row>
+					</Col>
+				  ) : null
+				}
                 <Col className="submit_transaction center" sm={{ span: 18, offset: 3 }}>
                   <Button onClick={this.submitTransaction}>Submit Transaction</Button>
                 </Col>
