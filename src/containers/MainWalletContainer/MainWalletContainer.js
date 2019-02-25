@@ -55,7 +55,9 @@ class mainWalletContainer extends PureComponent {
             <div className="main_wallet_area">
               <Row className="main_wallet_label">
                 <Col className="center">
-                  <span>Receive your funds</span>
+                  {
+                    this.state.containerType === 'receive' ? (<span>Receive your funds</span>) : (<span>Send your funds</span>)
+                  }
                 </Col>
               </Row>
               <Row className="main_wallet_btn">

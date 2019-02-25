@@ -121,8 +121,11 @@ class SendContainer extends PureComponent {
                 {
                   this.state.txStatus === 'success' ? (
                     <Col className="tx_send_success success_msg" sm={{ span: 18, offset: 3 }}>
+                      <p>Your transaction was successfully submitted to the ECC network!</p>
+				      <p>It may now take up to 10 - 15 minutes until it is confirmed.</p>
+				      <p>TxID: {this.state.txHash}</p>
                       <p>
-                        <a href={config.EXPORER_TX_URL + this.state.txHash + '.htm'}>{ config.EXPORER_TX_URL + this.state.txHash + '.htm' }</a>
+                        <a href={config.EXPORER_TX_URL + this.state.txHash + '.htm'}>Open Block Explorer</a>
                       </p>
                     </Col>
                   ) : null
