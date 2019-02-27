@@ -8,11 +8,16 @@ import PageNotFound from 'components/PageNotFound/PageNotFound';
 import LoginContainer from 'containers/LoginContainer/LoginContainer';
 import WalletConfirmContainer from 'containers/WalletConfirmContainer/WalletConfirmContainer';
 import KeystoreUploadContainer from 'containers/KeystoreUploadContainer/KeystoreUploadContainer';
-
 //import 'css/App.less';
 //import 'css/index.css';
 
 class App extends Component {
+  constructor() {
+    this.version = 0;
+	if (typeof COMMIT_SHA !== undefined) {
+	  this.version = COMMIT_SHA;
+    }
+  }
   render() {
     return (
       <Provider store={store}>
@@ -26,6 +31,7 @@ class App extends Component {
                 <Route exact path="/404" component={PageNotFound} />
                 <PrivateRoute path="/" component={RoutesContainer} />
               </Switch>
+              <div>V. {this.version}</div>
             </div>
           </div>
         </Router>

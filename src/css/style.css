@@ -21,7 +21,7 @@ p {
   width: 100%;
 }
 .App .logo {
-  width: 125px;
+  width: 40px;
 }
 .App .content {
   display: table-cell;
@@ -29,7 +29,7 @@ p {
   margin: auto;
   width: 550px;
   height: 600px;
-  padding: 0px 20px;
+  padding: 20px 20px 0 20px;
   margin-bottom: 72px;
 }
 .App .content .ant-layout {

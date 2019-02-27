@@ -34,9 +34,9 @@ export const setTransaction = (txUtxos, txUtxoValue, amount, receiveAddress, sen
   }
 
   // 10^6 according to amount.h: static const CAmount COIN = 1000000;
-  const txUtxoValueSatoshis = parseInt(+txUtxoValue * (10 ** 6), 10)
-  const amountSatoshis = parseInt(+amount * (10 ** 6), 10)
-  const feeSatoshis = parseInt(+config.FEE_AMOUNT * (10 ** 6), 10)
+  const txUtxoValueSatoshis = parseInt(+txUtxoValue * (10 ** config.COIN_DECIMALS), 10)
+  const amountSatoshis = parseInt(+amount * (10 ** config.COIN_DECIMALS), 10)
+  const feeSatoshis = parseInt(+config.FEE_AMOUNT * (10 ** config.COIN_DECIMALS), 10)
 
   const changeSatoshis = txUtxoValueSatoshis - amountSatoshis - feeSatoshis
 

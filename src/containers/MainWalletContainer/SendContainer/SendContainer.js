@@ -45,6 +45,8 @@ class SendContainer extends PureComponent {
       return;
     }
 
+    console.log("txValue: " + this.state.txValue);
+    console.log("wallet.balance: " + wallet.balance);
     if (this.state.txValue > wallet.balance) {
       this.setState({ errMsg: 'Insufficient Funds' });
     } else {

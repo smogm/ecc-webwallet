@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connectWallet, walletActionCreators } from 'core';
 import { Row, Col, Button, Layout } from 'antd';
 import { promisify } from '../../utilities';
+import logo from 'assets/img/logo.png';
 import ReceiveContainer from './ReceiveContainer/ReceiveContainer';
 import SendContainer from './SendContainer/SendContainer';
 
@@ -52,7 +53,12 @@ class mainWalletContainer extends PureComponent {
       <div className="block">
         <Layout>
           <Content className="main">
-            <div className="main_wallet_area">
+			<Row className="logo_area">
+              <Col className="center" sm={{ span: 22, offset: 1 }}>
+                <img alt="true" src={logo} className="logo" />
+              </Col>
+            </Row>
+            <Row className="main_wallet_area">
               <Row className="main_wallet_label">
                 <Col className="center">
                   {
@@ -73,7 +79,7 @@ class mainWalletContainer extends PureComponent {
                   this.state.containerType === 'receive' ? (<ReceiveContainer />) : (<SendContainer />)
                 }
               </Row>
-            </div>
+            </Row>
           </Content>
         </Layout>
       </div>
