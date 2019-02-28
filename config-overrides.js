@@ -1,16 +1,17 @@
 /**
  * Override create-react-app default config
  */
-
 const webpack = require('webpack');
 const childProcess = require('child_process');
 
 /* config-overrides.js */
 module.exports = function override(config, env) {
-  const VERSION = childProcess.execSync('git rev-parse HEAD').toString().trim();
+  const VERSION = childProcess.execSync('git rev-parse --short HEAD').toString().trim();
 	
-  config.plugins.push(new webpack.DefinePlugin({COMMIT_SHA: JSON.stringify(VERSION)}));
-  console.log(config.plugins);
+  config.plugins = [ ...config.plugins,
+      new webpack.DefinePlugin({'process.env.GITREV': JSON.stringify(VERSION)})
+    ];
+
   /**
     * Remove minify plugin for production build
   */

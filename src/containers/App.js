@@ -2,22 +2,26 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { store } from 'core';
+import { Row, Col, Layout } from 'antd';
 import RoutesContainer from 'containers/RoutesContainer/RoutesContainer';
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 import PageNotFound from 'components/PageNotFound/PageNotFound';
 import LoginContainer from 'containers/LoginContainer/LoginContainer';
 import WalletConfirmContainer from 'containers/WalletConfirmContainer/WalletConfirmContainer';
 import KeystoreUploadContainer from 'containers/KeystoreUploadContainer/KeystoreUploadContainer';
-//import 'css/App.less';
-//import 'css/index.css';
+
+const { Content } = Layout;
 
 class App extends Component {
   constructor() {
-    this.version = 0;
-	if (typeof COMMIT_SHA !== undefined) {
-	  this.version = COMMIT_SHA;
+	super();
+
+    this.gitRevision = 0;
+	if (typeof process.env.GITREV !== undefined) {
+	  this.gitRevision = process.env.GITREV;
     }
   }
+
   render() {
     return (
       <Provider store={store}>
@@ -31,7 +35,15 @@ class App extends Component {
                 <Route exact path="/404" component={PageNotFound} />
                 <PrivateRoute path="/" component={RoutesContainer} />
               </Switch>
-              <div>V. {this.version}</div>
+              <Layout>
+                <Content>
+                  <Row>
+                    <Col className="center" sm={{ span: 22, offset: 1 }}>
+                      <small>v. 1.0-{this.gitRevision}</small>
+                    </Col>
+                  </Row>
+                </Content>
+              </Layout>
             </div>
           </div>
         </Router>
